@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[    143618,       4014]
-NotebookOptionsPosition[    133140,       3869]
-NotebookOutlinePosition[    133577,       3886]
-CellTagsIndexPosition[    133534,       3883]
+NotebookDataLength[    143563,       4012]
+NotebookOptionsPosition[    133085,       3867]
+NotebookOutlinePosition[    133522,       3884]
+CellTagsIndexPosition[    133479,       3881]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -3491,7 +3491,7 @@ Cell[BoxData[{
   RowBox[{"tabM1", "=", 
    RowBox[{"Import", "[", 
     RowBox[{
-    "\"\<miguelito/IFR-95CI-MQ-round1-40-80days-v6.txt\>\"", ",", 
+    "\"\<miguelito/IFR-95CI-MQ-round1-40-80days-v6a.txt\>\"", ",", 
      "\"\<CSV\>\""}], "]"}]}], "]"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
@@ -3511,7 +3511,7 @@ Cell[BoxData[{
   RowBox[{"tabM2", "=", 
    RowBox[{"Import", "[", 
     RowBox[{
-    "\"\<miguelito/IFR-95CI-MQ-round2-40-80days-v6.txt\>\"", ",", 
+    "\"\<miguelito/IFR-95CI-MQ-round2-40-80days-v6a.txt\>\"", ",", 
      "\"\<CSV\>\""}], "]"}]}], "]"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
@@ -3531,7 +3531,7 @@ Cell[BoxData[{
   RowBox[{"tabM3", "=", 
    RowBox[{"Import", "[", 
     RowBox[{
-    "\"\<miguelito/IFR-95CI-MQ-round3-40-80days-v6.txt\>\"", ",", 
+    "\"\<miguelito/IFR-95CI-MQ-round3-40-80days-v6a.txt\>\"", ",", 
      "\"\<CSV\>\""}], "]"}]}], "]"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
@@ -3551,7 +3551,7 @@ Cell[BoxData[{
   RowBox[{"tabMall", "=", 
    RowBox[{"Import", "[", 
     RowBox[{
-    "\"\<miguelito/IFR-95CI-MQ-combined-40-80days-v6.txt\>\"", ",", 
+    "\"\<miguelito/IFR-95CI-MQ-combined-40-80days-v6a.txt\>\"", ",", 
      "\"\<CSV\>\""}], "]"}]}], "]"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
@@ -3577,16 +3577,15 @@ Cell[BoxData[{
        RowBox[{
        "\"\<UF\>\"", ",", "\"\<moda\>\"", ",", "\"\<mediana\>\"", ",", 
         "\"\<95-\>\"", ",", "\"\<95+\>\"", ",", "\"\<check\>\""}], "}"}]}], 
-     "}"}]}]}], "]"}]}], "Input",
- CellLabel->
-  "(L1) In[162]:=",ExpressionUUID->"6455f8ac-e18d-441b-8765-948eec4d1d08"],
+     "}"}]}]}], "]"}]}], "Input",ExpressionUUID->"6455f8ac-e18d-441b-8765-\
+948eec4d1d08"],
 
 Cell[BoxData[{
  RowBox[{"Dimensions", "[", 
   RowBox[{"tabP1", "=", 
    RowBox[{"Import", "[", 
     RowBox[{
-    "\"\<miguelito/prob-tab-states-FPR1.00%-round1-v6.csv\>\"", ",", 
+    "\"\<miguelito/prob-tab-states-FPR1.00%-round1-v6a.csv\>\"", ",", 
      "\"\<CSV\>\""}], "]"}]}], "]"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"tabP1", "=", 
@@ -3598,7 +3597,7 @@ Cell[BoxData[{
   RowBox[{"tabP2", "=", 
    RowBox[{"Import", "[", 
     RowBox[{
-    "\"\<miguelito/prob-tab-states-FPR1.00%-round2-v6.csv\>\"", ",", 
+    "\"\<miguelito/prob-tab-states-FPR1.00%-round2-v6a.csv\>\"", ",", 
      "\"\<CSV\>\""}], "]"}]}], "]"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"tabP2", "=", 
@@ -3610,7 +3609,7 @@ Cell[BoxData[{
   RowBox[{"tabP3", "=", 
    RowBox[{"Import", "[", 
     RowBox[{
-    "\"\<miguelito/prob-tab-states-FPR1.00%-round3-v6.csv\>\"", ",", 
+    "\"\<miguelito/prob-tab-states-FPR1.00%-round3-v6a.csv\>\"", ",", 
      "\"\<CSV\>\""}], "]"}]}], "]"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
@@ -3630,9 +3629,8 @@ Cell[BoxData[{
   RowBox[{"tabP1", ",", 
    RowBox[{"TableHeadings", "\[Rule]", 
     RowBox[{"{", 
-     RowBox[{"states", ",", " ", "headermig"}], "}"}]}]}], "]"}]}], "Input",
- CellLabel->
-  "(L1) In[171]:=",ExpressionUUID->"d56815e2-5f3a-40fa-b5cd-26c9be4d9d42"],
+     RowBox[{"states", ",", " ", "headermig"}], "}"}]}]}], "]"}]}], "Input",Ex\
+pressionUUID->"d56815e2-5f3a-40fa-b5cd-26c9be4d9d42"],
 
 Cell[BoxData[{
  RowBox[{
@@ -3868,7 +3866,7 @@ Cell[BoxData[
 }, Open  ]]
 },
 WindowSize->{1042, 776},
-WindowMargins->{{52, Automatic}, {Automatic, 0}},
+WindowMargins->{{44, Automatic}, {Automatic, 0}},
 TaggingRules->{"TryRealOnly" -> False},
 FrontEndVersion->"12.2 for Mac OS X x86 (64-bit) (December 12, 2020)",
 StyleDefinitions->"Default.nb",
@@ -4007,13 +4005,13 @@ Cell[115837, 3373, 92, 0, 37, "Subsubsection",ExpressionUUID->"e76c7326-3541-430
 Cell[115932, 3375, 750, 23, 136, "Input",ExpressionUUID->"854ba11a-2a9c-4b95-b114-44d347abf9fb"],
 Cell[116685, 3400, 965, 22, 94, "Input",ExpressionUUID->"71205c94-dd1b-45c2-9f37-77c38a197544"],
 Cell[117653, 3424, 2174, 62, 157, "Input",ExpressionUUID->"6c06437e-b1c5-46b6-b4ae-d47cec44e8de"],
-Cell[119830, 3488, 2948, 93, 220, "Input",ExpressionUUID->"6455f8ac-e18d-441b-8765-948eec4d1d08"],
-Cell[122781, 3583, 1738, 51, 178, "Input",ExpressionUUID->"d56815e2-5f3a-40fa-b5cd-26c9be4d9d42"],
-Cell[124522, 3636, 2276, 68, 241, "Input",ExpressionUUID->"785f456a-2a49-4749-9f40-e73386955e32"],
-Cell[126801, 3706, 1401, 39, 73, "Input",ExpressionUUID->"492f21ad-a968-41fb-b9fd-5972f54f36e1"],
-Cell[128205, 3747, 1899, 47, 136, "Input",ExpressionUUID->"06bc2089-a2e7-410e-98c8-c914a211a087"],
-Cell[130107, 3796, 1380, 32, 115, "Input",ExpressionUUID->"0b5da6f8-6597-44ad-8824-17a75b0913a7"],
-Cell[131490, 3830, 1622, 35, 157, "Input",ExpressionUUID->"7dde52df-5565-453f-be91-813fb7f9ea17"]
+Cell[119830, 3488, 2921, 92, 220, "Input",ExpressionUUID->"6455f8ac-e18d-441b-8765-948eec4d1d08"],
+Cell[122754, 3582, 1710, 50, 178, "Input",ExpressionUUID->"d56815e2-5f3a-40fa-b5cd-26c9be4d9d42"],
+Cell[124467, 3634, 2276, 68, 241, "Input",ExpressionUUID->"785f456a-2a49-4749-9f40-e73386955e32"],
+Cell[126746, 3704, 1401, 39, 73, "Input",ExpressionUUID->"492f21ad-a968-41fb-b9fd-5972f54f36e1"],
+Cell[128150, 3745, 1899, 47, 136, "Input",ExpressionUUID->"06bc2089-a2e7-410e-98c8-c914a211a087"],
+Cell[130052, 3794, 1380, 32, 115, "Input",ExpressionUUID->"0b5da6f8-6597-44ad-8824-17a75b0913a7"],
+Cell[131435, 3828, 1622, 35, 157, "Input",ExpressionUUID->"7dde52df-5565-453f-be91-813fb7f9ea17"]
 }, Closed]]
 }, Open  ]]
 }
