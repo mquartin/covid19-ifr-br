@@ -1,4 +1,4 @@
-# Computation of Covid-19 Infection Fatality Rate from serology surveys
+# Computation of Covid-19 Infection Fatality Ratio from serology surveys
 
 `epidata.nb` runs `epirun.nb` in order to obtain the time tau_ad and the number of deaths at the state or country levels. `epidata.nb` also makes summary tables and plots. Note that the IFRs are computed under the Gaussian approximaiton. Note that SIVEP-Gripe and Painel Coronavírus data are compressed to save space.
 
