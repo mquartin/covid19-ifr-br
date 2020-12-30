@@ -1,0 +1,3353 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[    128400,       3345]
+NotebookOptionsPosition[    122989,       3262]
+NotebookOutlinePosition[    123425,       3279]
+CellTagsIndexPosition[    123382,       3276]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"ageBin", "=", "1"}], ";"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"ages", "[", 
+     RowBox[{"[", "ageBin", "]"}], "]"}], ",", 
+    RowBox[{"fracAges", "[", 
+     RowBox[{"[", "ageBin", "]"}], "]"}]}], "}"}]}]], "Input",ExpressionUUID->\
+"1dc70b22-a1ca-4f14-933e-93f35dd0fc72"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"blevel", "=", "19"}], ";"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Which", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"alevel", "\[Equal]", "1"}], "\[IndentingNewLine]", ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"Print", "[", 
+       RowBox[{"Row", "[", 
+        RowBox[{"{", "\"\<...running Brazil\>\"", "}"}], "]"}], "]"}], ";"}], 
+     "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+     RowBox[{"alevel", "\[Equal]", "2"}], "\[IndentingNewLine]", ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"Print", "[", 
+       RowBox[{"Row", "[", 
+        RowBox[{"{", 
+         RowBox[{"\"\<...running states: \>\"", ",", 
+          RowBox[{"{", 
+           RowBox[{"blevel", ",", 
+            RowBox[{"states", "[", 
+             RowBox[{"[", "blevel", "]"}], "]"}]}], "}"}]}], "}"}], "]"}], 
+       "]"}], ";"}], "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+     RowBox[{"alevel", "\[Equal]", "3"}], "\[IndentingNewLine]", ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"stateb", "=", 
+       RowBox[{"dataepicovid", "[", 
+        RowBox[{"[", 
+         RowBox[{"blevel", ",", "1"}], "]"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Print", "[", 
+       RowBox[{"Row", "[", 
+        RowBox[{"{", 
+         RowBox[{"\"\<...running cities: \>\"", ",", 
+          RowBox[{"{", 
+           RowBox[{"blevel", ",", 
+            RowBox[{"cities", "[", 
+             RowBox[{"[", "blevel", "]"}], "]"}], ",", "stateb"}], "}"}]}], 
+         "}"}], "]"}], "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], 
+   ";"}]}]], "Input",
+ CellLabel->
+  "(L1) In[73]:=",ExpressionUUID->"50c52f9c-5b54-4efd-a7f8-d05853da7d9b"],
+
+Cell[CellGroupData[{
+
+Cell["identifying cities", "Subsection",ExpressionUUID->"15177f02-0ce9-4093-9bbe-08ed61798ecd"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"Dimensions", "[", 
+    RowBox[{"citiesIBGE", "=", 
+     RowBox[{
+     "Import", "[", 
+      "\"\<extra/Lista-de-Munic\[IAcute]pios-com-IBGE-Brasil.csv\>\"", 
+      "]"}]}], "]"}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{"Which", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"alevel", "\[Equal]", "1"}], "\[IndentingNewLine]", ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Dimensions", "[", 
+     RowBox[{"tabIBGE", "=", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"Flatten", "[", 
+         RowBox[{"Select", "[", 
+          RowBox[{"citiesIBGE", ",", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"StringMatchQ", "[", 
+               RowBox[{
+                RowBox[{"#", "[", 
+                 RowBox[{"[", "3", "]"}], "]"}], ",", 
+                RowBox[{"dataepicovid", "[", 
+                 RowBox[{"[", 
+                  RowBox[{"bb", ",", "2"}], "]"}], "]"}], ",", 
+                RowBox[{"IgnoreCase", "\[Rule]", "True"}]}], "]"}], "&&", 
+              RowBox[{
+               RowBox[{"#", "[", 
+                RowBox[{"[", "2", "]"}], "]"}], "\[Equal]", 
+               RowBox[{"dataepicovid", "[", 
+                RowBox[{"[", 
+                 RowBox[{"bb", ",", "1"}], "]"}], "]"}]}]}], ")"}], "&"}]}], 
+          "]"}], "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"bb", ",", 
+          RowBox[{"Length", "[", "dataepicovid", "]"}]}], "}"}]}], "]"}]}], 
+     "]"}], ";", "\[IndentingNewLine]", 
+    RowBox[{"Dimensions", "[", 
+     RowBox[{"tabIBGE", "=", 
+      RowBox[{"tabIBGE", "[", 
+       RowBox[{"[", 
+        RowBox[{"All", ",", "1"}], "]"}], "]"}]}], "]"}]}], 
+   "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+   RowBox[{"alevel", "\[Equal]", "2"}], "\[IndentingNewLine]", ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"citiesINstate", "=", 
+     RowBox[{"Select", "[", 
+      RowBox[{"dataepicovid", ",", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"#", "[", 
+           RowBox[{"[", "1", "]"}], "]"}], "\[Equal]", 
+          RowBox[{"states", "[", 
+           RowBox[{"[", "blevel", "]"}], "]"}]}], ")"}], "&"}]}], "]"}]}], 
+    ";", "\[IndentingNewLine]", 
+    RowBox[{"Dimensions", "[", 
+     RowBox[{"tabIBGE", "=", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"Flatten", "[", 
+         RowBox[{"Select", "[", 
+          RowBox[{"citiesIBGE", ",", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"StringMatchQ", "[", 
+               RowBox[{
+                RowBox[{"#", "[", 
+                 RowBox[{"[", "3", "]"}], "]"}], ",", 
+                RowBox[{"citiesINstate", "[", 
+                 RowBox[{"[", 
+                  RowBox[{"bb", ",", "2"}], "]"}], "]"}], ",", 
+                RowBox[{"IgnoreCase", "\[Rule]", "True"}]}], "]"}], "&&", 
+              RowBox[{
+               RowBox[{"#", "[", 
+                RowBox[{"[", "2", "]"}], "]"}], "\[Equal]", 
+               RowBox[{"citiesINstate", "[", 
+                RowBox[{"[", 
+                 RowBox[{"bb", ",", "1"}], "]"}], "]"}]}]}], ")"}], "&"}]}], 
+          "]"}], "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"bb", ",", 
+          RowBox[{"Length", "[", "citiesINstate", "]"}]}], "}"}]}], "]"}]}], 
+     "]"}], ";", "\[IndentingNewLine]", 
+    RowBox[{"Dimensions", "[", 
+     RowBox[{"tabIBGE", "=", 
+      RowBox[{"tabIBGE", "[", 
+       RowBox[{"[", 
+        RowBox[{"All", ",", "1"}], "]"}], "]"}]}], "]"}]}], 
+   "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+   RowBox[{"alevel", "\[Equal]", "3"}], "\[IndentingNewLine]", ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"bIBGE", "=", 
+     RowBox[{"Flatten", "[", 
+      RowBox[{"Select", "[", 
+       RowBox[{"citiesIBGE", ",", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"StringMatchQ", "[", 
+            RowBox[{
+             RowBox[{"#", "[", 
+              RowBox[{"[", "3", "]"}], "]"}], ",", 
+             RowBox[{"cities", "[", 
+              RowBox[{"[", "blevel", "]"}], "]"}], ",", 
+             RowBox[{"IgnoreCase", "\[Rule]", "True"}]}], "]"}], "&&", 
+           RowBox[{
+            RowBox[{"#", "[", 
+             RowBox[{"[", "2", "]"}], "]"}], "\[Equal]", "stateb"}]}], ")"}], 
+         "&"}]}], "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"Dimensions", "[", 
+     RowBox[{"bIBGE", "=", 
+      RowBox[{"bIBGE", "[", 
+       RowBox[{"[", "1", "]"}], "]"}]}], "]"}]}]}], "\[IndentingNewLine]", 
+  "]"}]}], "Input",
+ CellLabel->
+  "(L1) In[74]:=",ExpressionUUID->"e794e9ac-3de8-4a96-bdbd-26ed37926844"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["freq antibody data", "Subsection",ExpressionUUID->"3603d88c-c66f-4723-90ed-5e2728b7e89e"],
+
+Cell[BoxData[
+ RowBox[{"Which", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"alevel", "\[Equal]", "1"}], "\[IndentingNewLine]", ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"fa", "=", 
+     RowBox[{"datamigb", "[", 
+      RowBox[{"[", 
+       RowBox[{"blevel", ",", "faval"}], "]"}], "]"}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"sigmafa", "=", 
+     RowBox[{"datamigb", "[", 
+      RowBox[{"[", 
+       RowBox[{"blevel", ",", 
+        RowBox[{"-", "1"}]}], "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"poptot", "=", 
+     RowBox[{
+      RowBox[{"fracAges", "[", 
+       RowBox[{"[", "ageBin", "]"}], "]"}], 
+      RowBox[{"Total", "[", 
+       RowBox[{"dataepicovid", "[", 
+        RowBox[{"[", 
+         RowBox[{"All", ",", 
+          RowBox[{"-", "1"}]}], "]"}], "]"}], "]"}]}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"infop", "=", 
+     RowBox[{"{", 
+      RowBox[{"\"\<Brazil\>\"", ",", "poptot", ",", 
+       RowBox[{
+        RowBox[{"ToString", "[", 
+         RowBox[{"Round", "[", 
+          RowBox[{
+           RowBox[{"100", "fa"}], ",", ".01"}], "]"}], "]"}], "<>", 
+        "\"\<%\>\""}]}], "}"}]}]}], "\[IndentingNewLine]", ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"alevel", "\[Equal]", "2"}], "\[IndentingNewLine]", ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"fa", "=", 
+     RowBox[{"datamigs", "[", 
+      RowBox[{"[", 
+       RowBox[{"blevel", ",", "faval"}], "]"}], "]"}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"sigmafa", "=", 
+     RowBox[{"datamigs", "[", 
+      RowBox[{"[", 
+       RowBox[{"blevel", ",", 
+        RowBox[{"-", "1"}]}], "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"poptot", "=", 
+     RowBox[{
+      RowBox[{"fracAges", "[", 
+       RowBox[{"[", "ageBin", "]"}], "]"}], 
+      RowBox[{"Total", "[", 
+       RowBox[{
+        RowBox[{"Select", "[", 
+         RowBox[{"dataepicovid", ",", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"#", "[", 
+              RowBox[{"[", "1", "]"}], "]"}], "\[Equal]", 
+             RowBox[{"states", "[", 
+              RowBox[{"[", "blevel", "]"}], "]"}]}], ")"}], "&"}]}], "]"}], 
+        "[", 
+        RowBox[{"[", 
+         RowBox[{"All", ",", 
+          RowBox[{"-", "1"}]}], "]"}], "]"}], "]"}]}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"infop", "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"states", "[", 
+        RowBox[{"[", "blevel", "]"}], "]"}], ",", "poptot", ",", 
+       RowBox[{
+        RowBox[{"ToString", "[", 
+         RowBox[{"Round", "[", 
+          RowBox[{
+           RowBox[{"100", "fa"}], ",", ".01"}], "]"}], "]"}], "<>", 
+        "\"\<%\>\""}]}], "}"}]}]}], "\[IndentingNewLine]", ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"alevel", "\[Equal]", "3"}], "\[IndentingNewLine]", ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"fa", "=", 
+     RowBox[{"datamigc", "[", 
+      RowBox[{"[", 
+       RowBox[{"blevel", ",", "faval"}], "]"}], "]"}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"sigmafa", "=", 
+     RowBox[{"datamigc", "[", 
+      RowBox[{"[", 
+       RowBox[{"blevel", ",", 
+        RowBox[{"-", "1"}]}], "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"poptot", "=", 
+     RowBox[{
+      RowBox[{"fracAges", "[", 
+       RowBox[{"[", "ageBin", "]"}], "]"}], 
+      RowBox[{"dataepicovid", "[", 
+       RowBox[{"[", 
+        RowBox[{"blevel", ",", 
+         RowBox[{"-", "1"}]}], "]"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"infop", "=", 
+     RowBox[{"{", 
+      RowBox[{"stateb", ",", "bIBGE", ",", 
+       RowBox[{"cities", "[", 
+        RowBox[{"[", "blevel", "]"}], "]"}], ",", "poptot", ",", 
+       RowBox[{
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"fa", "\[Equal]", "\"\<-\>\""}], ",", "fa", ",", 
+          RowBox[{"ToString", "[", 
+           RowBox[{"Round", "[", 
+            RowBox[{
+             RowBox[{"100", "fa"}], ",", ".01"}], "]"}], "]"}]}], "]"}], 
+        "<>", "\"\<%\>\""}]}], "}"}]}]}]}], "\[IndentingNewLine]", 
+  "]"}]], "Input",
+ CellLabel->
+  "(L1) In[76]:=",ExpressionUUID->"430617af-0d06-4005-bfb9-248cbf22888d"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["preparing SIVEP-Gripe", "Subsection",ExpressionUUID->"1b922b21-79bf-4e27-92e2-c0e97b07bdda"],
+
+Cell[CellGroupData[{
+
+Cell["1", "Subsubsection",ExpressionUUID->"63ccb177-14dc-40ea-a186-492a119c183a"],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"AbsoluteTiming", "@", 
+     RowBox[{"Which", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"alevel", "\[Equal]", "1"}], "\[IndentingNewLine]", ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{"Dimensions", "[", 
+         RowBox[{"datacovidx", "=", "datasivep"}], "]"}], "*)"}], " ", 
+       RowBox[{"(*", " ", 
+        RowBox[{
+        "with", " ", "this", " ", "the", " ", "numbers", " ", "are", " ", 
+         "97924", " ", "and", " ", "29631", " ", "of", " ", "fig1", " ", "of",
+          " ", "the", " ", "paper"}], " ", "*)"}], "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Dimensions", "[", 
+         RowBox[{"tabPa", "=", 
+          RowBox[{"Table", "[", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"Select", "[", 
+             RowBox[{"datasivep", ",", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"#", "[", 
+                  RowBox[{"[", "resMUN", "]"}], "]"}], "\[Equal]", 
+                 RowBox[{"tabIBGE", "[", 
+                  RowBox[{"[", "i", "]"}], "]"}]}], ")"}], "&"}]}], "]"}], 
+            "\[IndentingNewLine]", ",", 
+            RowBox[{"{", 
+             RowBox[{"i", ",", 
+              RowBox[{"Length", "[", "tabIBGE", "]"}]}], "}"}]}], "]"}]}], 
+         "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"Dimensions", "[", 
+         RowBox[{"datacovidx", "=", 
+          RowBox[{"Flatten", "[", 
+           RowBox[{"tabPa", ",", "1"}], "]"}]}], "]"}]}], 
+       "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+       RowBox[{"alevel", "\[Equal]", "2"}], "\[IndentingNewLine]", ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Dimensions", "[", 
+        RowBox[{"datacovidx", "=", 
+         RowBox[{"Select", "[", 
+          RowBox[{"datasivep", ",", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"#", "[", 
+               RowBox[{"[", "resUF", "]"}], "]"}], "\[Equal]", 
+              RowBox[{"states", "[", 
+               RowBox[{"[", "blevel", "]"}], "]"}]}], ")"}], "&"}]}], "]"}]}],
+         "]"}], "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"alevel", "\[Equal]", "3"}], "&&", 
+        RowBox[{"stateonly", "\[Equal]", "1"}]}], "\[IndentingNewLine]", ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Dimensions", "[", 
+        RowBox[{"datacovidx", "=", 
+         RowBox[{"Select", "[", 
+          RowBox[{"datasivep", ",", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"#", "[", 
+               RowBox[{"[", "resUF", "]"}], "]"}], "\[Equal]", "stateb"}], 
+             ")"}], "&"}]}], "]"}]}], "]"}], "\[IndentingNewLine]", ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"alevel", "\[Equal]", "3"}], "&&", 
+        RowBox[{"stateonly", "\[Equal]", "0"}]}], "\[IndentingNewLine]", ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Dimensions", "[", 
+        RowBox[{"datacovidx", "=", 
+         RowBox[{"Select", "[", 
+          RowBox[{"datasivep", ",", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"#", "[", 
+               RowBox[{"[", "resMUN", "]"}], "]"}], "\[Equal]", "bIBGE"}], 
+             RowBox[{"(*", 
+              RowBox[{"&&", 
+               RowBox[{
+                RowBox[{"#", "[", 
+                 RowBox[{"[", "resUF", "]"}], "]"}], "\[Equal]", "stateb"}]}],
+               "*)"}], ")"}], "&"}]}], "]"}]}], "]"}]}], 
+      "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+    RowBox[{"ClearAll", "[", "tabPa", "]"}]}], ";", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"AbsoluteTiming", "@", 
+     RowBox[{"Dimensions", "[", 
+      RowBox[{"datacovid", "=", 
+       RowBox[{"Select", "[", 
+        RowBox[{"datacovidx", ",", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"#", "[", 
+              RowBox[{"[", "corona", "]"}], "]"}], "\[Equal]", "1"}], "&&", 
+            RowBox[{
+             RowBox[{"#", "[", 
+              RowBox[{"[", "hosp", "]"}], "]"}], "\[Equal]", "1"}], "&&", 
+            RowBox[{
+             RowBox[{"#", "[", 
+              RowBox[{"[", "dtSIN", "]"}], "]"}], "\[NotEqual]", 
+             "\"\<XXXX\>\""}], "&&", 
+            RowBox[{"DateObjectQ", "[", 
+             RowBox[{"DateObject", "[", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"#", "[", 
+                 RowBox[{"[", "dtSIN", "]"}], "]"}], ",", "dateformat1"}], 
+               "}"}], "]"}], "]"}], "&&", 
+            RowBox[{
+             RowBox[{"#", "[", 
+              RowBox[{"[", "dtINT", "]"}], "]"}], "\[NotEqual]", 
+             "\"\<XXXX\>\""}], "&&", 
+            RowBox[{"DateObjectQ", "[", 
+             RowBox[{"DateObject", "[", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"#", "[", 
+                 RowBox[{"[", "dtINT", "]"}], "]"}], ",", "dateformat1"}], 
+               "}"}], "]"}], "]"}], "&&", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"AbsoluteTime", "[", 
+                RowBox[{"DateObject", "[", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"#", "[", 
+                    RowBox[{"[", "dtINT", "]"}], "]"}], ",", "dateformat1"}], 
+                  "}"}], "]"}], "]"}], "-", 
+               RowBox[{"AbsoluteTime", "[", 
+                RowBox[{"DateObject", "[", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"#", "[", 
+                    RowBox[{"[", "dtSIN", "]"}], "]"}], ",", "dateformat1"}], 
+                  "}"}], "]"}], "]"}]}], "\[GreaterEqual]", 
+              RowBox[{"(*", ">", "*)"}], "0"}], ")"}], "&&", 
+            RowBox[{
+             RowBox[{"#", "[", 
+              RowBox[{"[", "EVO", "]"}], "]"}], "\[Equal]", "2"}], "&&", 
+            RowBox[{
+             RowBox[{"#", "[", 
+              RowBox[{"[", "dtEVO", "]"}], "]"}], "\[NotEqual]", 
+             "\"\<XXXX\>\""}], "&&", 
+            RowBox[{"DateObjectQ", "[", 
+             RowBox[{"DateObject", "[", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"#", "[", 
+                 RowBox[{"[", "dtEVO", "]"}], "]"}], ",", "dateformat1"}], 
+               "}"}], "]"}], "]"}], "&&", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"AbsoluteTime", "[", 
+                RowBox[{"DateObject", "[", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"#", "[", 
+                    RowBox[{"[", "dtEVO", "]"}], "]"}], ",", "dateformat1"}], 
+                  "}"}], "]"}], "]"}], "-", 
+               RowBox[{"AbsoluteTime", "[", 
+                RowBox[{"DateObject", "[", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"#", "[", 
+                    RowBox[{"[", "dtINT", "]"}], "]"}], ",", "dateformat1"}], 
+                  "}"}], "]"}], "]"}]}], "\[GreaterEqual]", "0"}], ")"}]}], 
+           ")"}], "&"}]}], "]"}]}], "]"}]}], "\[IndentingNewLine]", 
+    "\[IndentingNewLine]", 
+    RowBox[{"AbsoluteTiming", "@", 
+     RowBox[{"Dimensions", "[", 
+      RowBox[{"datacovidXXX", "=", 
+       RowBox[{"Select", "[", 
+        RowBox[{"datacovidx", ",", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"#", "[", 
+              RowBox[{"[", "corona", "]"}], "]"}], "\[Equal]", "1"}], "&&", 
+            RowBox[{
+             RowBox[{"#", "[", 
+              RowBox[{"[", "hosp", "]"}], "]"}], "\[Equal]", "1"}], "&&", 
+            RowBox[{
+             RowBox[{"#", "[", 
+              RowBox[{"[", "EVO", "]"}], "]"}], "\[Equal]", "2"}], "&&", 
+            RowBox[{
+             RowBox[{"#", "[", 
+              RowBox[{"[", "dtEVO", "]"}], "]"}], "\[NotEqual]", 
+             "\"\<XXXX\>\""}], "&&", 
+            RowBox[{"DateObjectQ", "[", 
+             RowBox[{"DateObject", "[", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"#", "[", 
+                 RowBox[{"[", "dtEVO", "]"}], "]"}], ",", "dateformat1"}], 
+               "}"}], "]"}], "]"}]}], ")"}], "&"}]}], "]"}]}], "]"}]}], 
+    "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{"AbsoluteTiming", "@", 
+     RowBox[{"Dimensions", "[", 
+      RowBox[{"datacovidCorona", "=", 
+       RowBox[{"Select", "[", 
+        RowBox[{"datacovidx", ",", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"#", "[", 
+             RowBox[{"[", "corona", "]"}], "]"}], "\[Equal]", "1"}], ")"}], 
+          "&"}]}], "]"}]}], "]"}]}]}]}], "*)"}]], "Input",
+ CellLabel->
+  "(L1) In[77]:=",ExpressionUUID->"0f4a0258-a7ec-40af-9f7e-ffa0ada5d50a"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["2", "Subsubsection",ExpressionUUID->"41e61321-28f8-459e-85e3-4b7c33822e1c"],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"AbsoluteTiming", "@", 
+     RowBox[{"Which", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"alevel", "\[Equal]", "1"}], "\[IndentingNewLine]", ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Dimensions", "[", 
+         RowBox[{"tabPa", "=", 
+          RowBox[{"Table", "[", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"Select", "[", 
+             RowBox[{"datasivep2", ",", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"#", "[", 
+                  RowBox[{"[", "resMUN2", "]"}], "]"}], "\[Equal]", 
+                 RowBox[{"tabIBGE", "[", 
+                  RowBox[{"[", "i", "]"}], "]"}]}], ")"}], "&"}]}], "]"}], 
+            "\[IndentingNewLine]", ",", 
+            RowBox[{"{", 
+             RowBox[{"i", ",", 
+              RowBox[{"Length", "[", "tabIBGE", "]"}]}], "}"}]}], "]"}]}], 
+         "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"Dimensions", "[", 
+         RowBox[{"datacovidx2", "=", 
+          RowBox[{"Flatten", "[", 
+           RowBox[{"tabPa", ",", "1"}], "]"}]}], "]"}]}], 
+       "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+       RowBox[{"alevel", "\[Equal]", "2"}], "\[IndentingNewLine]", ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Dimensions", "[", 
+        RowBox[{"datacovidx2", "=", 
+         RowBox[{"Select", "[", 
+          RowBox[{"datasivep2", ",", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"#", "[", 
+               RowBox[{"[", "resUF2", "]"}], "]"}], "\[Equal]", 
+              RowBox[{"states", "[", 
+               RowBox[{"[", "blevel", "]"}], "]"}]}], ")"}], "&"}]}], "]"}]}],
+         "]"}], "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"alevel", "\[Equal]", "3"}], "&&", 
+        RowBox[{"stateonly", "\[Equal]", "1"}]}], "\[IndentingNewLine]", ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Dimensions", "[", 
+        RowBox[{"datacovidx2", "=", 
+         RowBox[{"Select", "[", 
+          RowBox[{"datasivep2", ",", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"#", "[", 
+               RowBox[{"[", "resUF2", "]"}], "]"}], "\[Equal]", "stateb"}], 
+             ")"}], "&"}]}], "]"}]}], "]"}], "\[IndentingNewLine]", ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"alevel", "\[Equal]", "3"}], "&&", 
+        RowBox[{"stateonly", "\[Equal]", "0"}]}], "\[IndentingNewLine]", ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Dimensions", "[", 
+        RowBox[{"datacovidx2", "=", 
+         RowBox[{"Select", "[", 
+          RowBox[{"datasivep2", ",", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"#", "[", 
+               RowBox[{"[", "resMUN2", "]"}], "]"}], "\[Equal]", "bIBGE"}], 
+             RowBox[{"(*", 
+              RowBox[{"&&", 
+               RowBox[{
+                RowBox[{"#", "[", 
+                 RowBox[{"[", "resUF2", "]"}], "]"}], "\[Equal]", 
+                "stateb"}]}], "*)"}], ")"}], "&"}]}], "]"}]}], "]"}]}], 
+      "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+    RowBox[{"ClearAll", "[", "tabPa", "]"}]}], ";", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"AbsoluteTiming", "@", 
+      RowBox[{"Dimensions", "[", 
+       RowBox[{"datacovid2", "=", 
+        RowBox[{"Select", "[", 
+         RowBox[{"datacovidx2", ",", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"#", "[", 
+               RowBox[{"[", "corona2", "]"}], "]"}], "\[Equal]", "1"}], "&&", 
+             
+             RowBox[{
+              RowBox[{"#", "[", 
+               RowBox[{"[", "hosp2", "]"}], "]"}], "\[Equal]", "1"}], "&&", 
+             RowBox[{
+              RowBox[{"#", "[", 
+               RowBox[{"[", "dtSIN2", "]"}], "]"}], "\[NotEqual]", 
+              "\"\<XXXX\>\""}], "&&", 
+             RowBox[{"DateObjectQ", "[", 
+              RowBox[{"DateObject", "[", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"#", "[", 
+                  RowBox[{"[", "dtSIN2", "]"}], "]"}], ",", "dateformat2"}], 
+                "}"}], "]"}], "]"}], "&&", 
+             RowBox[{
+              RowBox[{"#", "[", 
+               RowBox[{"[", "dtINT2", "]"}], "]"}], "\[NotEqual]", 
+              "\"\<XXXX\>\""}], "&&", 
+             RowBox[{"DateObjectQ", "[", 
+              RowBox[{"DateObject", "[", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"#", "[", 
+                  RowBox[{"[", "dtINT2", "]"}], "]"}], ",", "dateformat2"}], 
+                "}"}], "]"}], "]"}], "&&", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"AbsoluteTime", "[", 
+                 RowBox[{"DateObject", "[", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"#", "[", 
+                    RowBox[{"[", "dtINT2", "]"}], "]"}], ",", "dateformat2"}],
+                    "}"}], "]"}], "]"}], "-", 
+                RowBox[{"AbsoluteTime", "[", 
+                 RowBox[{"DateObject", "[", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"#", "[", 
+                    RowBox[{"[", "dtSIN2", "]"}], "]"}], ",", "dateformat2"}],
+                    "}"}], "]"}], "]"}]}], "\[GreaterEqual]", 
+               RowBox[{"(*", ">", "*)"}], "0"}], ")"}], "&&", 
+             RowBox[{
+              RowBox[{"#", "[", 
+               RowBox[{"[", "EVO2", "]"}], "]"}], "\[Equal]", "2"}], "&&", 
+             RowBox[{
+              RowBox[{"#", "[", 
+               RowBox[{"[", "dtEVO2", "]"}], "]"}], "\[NotEqual]", 
+              "\"\<XXXX\>\""}], "&&", 
+             RowBox[{"DateObjectQ", "[", 
+              RowBox[{"DateObject", "[", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"#", "[", 
+                  RowBox[{"[", "dtEVO2", "]"}], "]"}], ",", "dateformat2"}], 
+                "}"}], "]"}], "]"}], "&&", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"AbsoluteTime", "[", 
+                 RowBox[{"DateObject", "[", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"#", "[", 
+                    RowBox[{"[", "dtEVO2", "]"}], "]"}], ",", "dateformat2"}],
+                    "}"}], "]"}], "]"}], "-", 
+                RowBox[{"AbsoluteTime", "[", 
+                 RowBox[{"DateObject", "[", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"#", "[", 
+                    RowBox[{"[", "dtINT2", "]"}], "]"}], ",", "dateformat2"}],
+                    "}"}], "]"}], "]"}]}], "\[GreaterEqual]", "0"}], ")"}]}], 
+            ")"}], "&"}]}], "]"}]}], "]"}]}], ";"}], "*)"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"AbsoluteTiming", "@", 
+    RowBox[{"Dimensions", "[", 
+     RowBox[{"datacovidXXX2", "=", 
+      RowBox[{"Select", "[", 
+       RowBox[{"datacovidx2", ",", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"#", "[", 
+             RowBox[{"[", "corona2", "]"}], "]"}], "\[Equal]", "1"}], "&&", 
+           RowBox[{
+            RowBox[{"#", "[", 
+             RowBox[{"[", "hosp2", "]"}], "]"}], "\[Equal]", "1"}], "&&", 
+           RowBox[{
+            RowBox[{"#", "[", 
+             RowBox[{"[", "EVO2", "]"}], "]"}], "\[Equal]", "2"}], "&&", 
+           RowBox[{
+            RowBox[{"#", "[", 
+             RowBox[{"[", "dtEVO2", "]"}], "]"}], "\[NotEqual]", 
+            "\"\<XXXX\>\""}], "&&", 
+           RowBox[{"DateObjectQ", "[", 
+            RowBox[{"DateObject", "[", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"#", "[", 
+                RowBox[{"[", "dtEVO2", "]"}], "]"}], ",", "dateformat2"}], 
+              "}"}], "]"}], "]"}]}], ")"}], "&"}]}], "]"}]}], "]"}]}]}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"AbsoluteTiming", "@", 
+     RowBox[{"Dimensions", "[", 
+      RowBox[{"datacovidCorona2", "=", 
+       RowBox[{"Select", "[", 
+        RowBox[{"datacovidx2", ",", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"#", "[", 
+             RowBox[{"[", "corona2", "]"}], "]"}], "\[Equal]", "1"}], ")"}], 
+          "&"}]}], "]"}]}], "]"}]}], ";"}], "*)"}], "*)"}]], "Input",
+ CellLabel->
+  "(L1) In[78]:=",ExpressionUUID->"ff32479e-b8a1-48f4-a40e-3bad1042c0ec"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["3", "Subsubsection",ExpressionUUID->"3a99a1b8-fe00-4240-86ba-e28ebb4230d1"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"all", " ", "cases"}], " ", "\[Rule]", " ", 
+    RowBox[{"now", " ", "covid", " ", "cases"}]}], " ", "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Dimensions", "[", "datasivep3", "]"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"covid", " ", "cases"}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"AbsoluteTiming", "@", 
+     RowBox[{"Dimensions", "[", 
+      RowBox[{"datasivep3", "=", 
+       RowBox[{"Select", "[", 
+        RowBox[{"datasivep3", ",", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"#", "[", 
+             RowBox[{"[", "corona3", "]"}], "]"}], "\[Equal]", "1"}], ")"}], 
+          "&"}]}], "]"}]}], "]"}]}], "*)"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"age", " ", "restriction"}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"AbsoluteTiming", "@", 
+    RowBox[{"Dimensions", "[", 
+     RowBox[{"datasivep3A", "=", 
+      RowBox[{"Select", "[", 
+       RowBox[{"datasivep3", ",", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"ages", "[", 
+            RowBox[{"[", 
+             RowBox[{"ageBin", ",", "1"}], "]"}], "]"}], "\[LessEqual]", 
+           RowBox[{"#", "[", 
+            RowBox[{"[", "IDADE3", "]"}], "]"}], "\[LessEqual]", 
+           RowBox[{"ages", "[", 
+            RowBox[{"[", 
+             RowBox[{"ageBin", ",", "2"}], "]"}], "]"}]}], ")"}], "&"}]}], 
+       "]"}]}], "]"}]}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "covid", " ", "cases", " ", "for", " ", "the", " ", "given", " ", 
+     "analysis"}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"AbsoluteTiming", "@", 
+    RowBox[{"Which", "[", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"alevel", "\[Equal]", "1"}], "\[IndentingNewLine]", ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Dimensions", "[", 
+        RowBox[{"tabPa", "=", 
+         RowBox[{"Table", "[", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"Select", "[", 
+            RowBox[{"datasivep3A", ",", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"#", "[", 
+                 RowBox[{"[", "resMUN3", "]"}], "]"}], "\[Equal]", 
+                RowBox[{"tabIBGE", "[", 
+                 RowBox[{"[", "i", "]"}], "]"}]}], ")"}], "&"}]}], "]"}], 
+           "\[IndentingNewLine]", ",", 
+           RowBox[{"{", 
+            RowBox[{"i", ",", 
+             RowBox[{"Length", "[", "tabIBGE", "]"}]}], "}"}]}], "]"}]}], 
+        "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"Dimensions", "[", 
+        RowBox[{"datacovidx3", "=", 
+         RowBox[{"Flatten", "[", 
+          RowBox[{"tabPa", ",", "1"}], "]"}]}], "]"}]}], 
+      "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+      RowBox[{"alevel", "\[Equal]", "2"}], "\[IndentingNewLine]", ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Dimensions", "[", 
+       RowBox[{"datacovidx3", "=", 
+        RowBox[{"Select", "[", 
+         RowBox[{"datasivep3A", ",", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"#", "[", 
+              RowBox[{"[", "resUF3", "]"}], "]"}], "\[Equal]", 
+             RowBox[{"states", "[", 
+              RowBox[{"[", "blevel", "]"}], "]"}]}], ")"}], "&"}]}], "]"}]}], 
+       "]"}], "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"alevel", "\[Equal]", "3"}], "&&", 
+       RowBox[{"stateonly", "\[Equal]", "1"}]}], "\[IndentingNewLine]", ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Dimensions", "[", 
+       RowBox[{"datacovidx3", "=", 
+        RowBox[{"Select", "[", 
+         RowBox[{"datasivep3A", ",", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"#", "[", 
+              RowBox[{"[", "resUF3", "]"}], "]"}], "\[Equal]", "stateb"}], 
+            ")"}], "&"}]}], "]"}]}], "]"}], "\[IndentingNewLine]", ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"alevel", "\[Equal]", "3"}], "&&", 
+       RowBox[{"stateonly", "\[Equal]", "0"}]}], "\[IndentingNewLine]", ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Dimensions", "[", 
+       RowBox[{"datacovidx3", "=", 
+        RowBox[{"Select", "[", 
+         RowBox[{"datasivep3A", ",", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"#", "[", 
+              RowBox[{"[", "resMUN3", "]"}], "]"}], "\[Equal]", "bIBGE"}], 
+            RowBox[{"(*", 
+             RowBox[{"&&", 
+              RowBox[{
+               RowBox[{"#", "[", 
+                RowBox[{"[", "resUF3", "]"}], "]"}], "\[Equal]", "stateb"}]}],
+              "*)"}], ")"}], "&"}]}], "]"}]}], "]"}]}], "\[IndentingNewLine]",
+      "]"}]}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"ClearAll", "[", "tabPa", "]"}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"AbsoluteTiming", "@", 
+     RowBox[{"Dimensions", "[", 
+      RowBox[{"datacovidCorona3", "=", 
+       RowBox[{"Select", "[", 
+        RowBox[{"datacovidx3", ",", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"#", "[", 
+             RowBox[{"[", "corona3", "]"}], "]"}], "\[Equal]", "1"}], ")"}], 
+          "&"}]}], "]"}]}], "]"}]}], "*)"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"this", " ", "is", " ", "for", " ", "nd"}], " ", "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"AbsoluteTiming", "@", 
+    RowBox[{"Dimensions", "[", 
+     RowBox[{"datacovidXXX3", "=", 
+      RowBox[{"Select", "[", 
+       RowBox[{"datacovidx3", ",", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"(*", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"#", "[", 
+              RowBox[{"[", "corona3", "]"}], "]"}], "\[Equal]", "1"}], "&&"}],
+            "*)"}], 
+          RowBox[{
+           RowBox[{
+            RowBox[{"#", "[", 
+             RowBox[{"[", "hosp3", "]"}], "]"}], "\[Equal]", "1"}], "&&", 
+           RowBox[{
+            RowBox[{"#", "[", 
+             RowBox[{"[", "EVO3", "]"}], "]"}], "\[Equal]", "2"}], "&&", 
+           RowBox[{
+            RowBox[{"#", "[", 
+             RowBox[{"[", "dtEVO3", "]"}], "]"}], "\[NotEqual]", 
+            "\"\<XXXX\>\""}], "&&", 
+           RowBox[{"DateObjectQ", "[", 
+            RowBox[{"DateObject", "[", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"#", "[", 
+                RowBox[{"[", "dtEVO3", "]"}], "]"}], ",", "dateformat3"}], 
+              "}"}], "]"}], "]"}]}], ")"}], "&"}]}], "]"}]}], "]"}]}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"this", " ", "is", " ", "for", " ", "tauSD"}], " ", "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"AbsoluteTiming", "@", 
+    RowBox[{"Dimensions", "[", 
+     RowBox[{"datacovid3", "=", 
+      RowBox[{"Select", "[", 
+       RowBox[{"datacovidXXX3", ",", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"(*", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"#", "[", 
+              RowBox[{"[", "corona3", "]"}], "]"}], "\[Equal]", "1"}], "&&", 
+            RowBox[{
+             RowBox[{"#", "[", 
+              RowBox[{"[", "hosp3", "]"}], "]"}], "\[Equal]", "1"}], "&&"}], 
+           "*)"}], 
+          RowBox[{
+           RowBox[{
+            RowBox[{"#", "[", 
+             RowBox[{"[", "dtSIN3", "]"}], "]"}], "\[NotEqual]", 
+            "\"\<XXXX\>\""}], "&&", 
+           RowBox[{"DateObjectQ", "[", 
+            RowBox[{"DateObject", "[", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"#", "[", 
+                RowBox[{"[", "dtSIN3", "]"}], "]"}], ",", "dateformat3"}], 
+              "}"}], "]"}], "]"}], "&&", 
+           RowBox[{
+            RowBox[{"#", "[", 
+             RowBox[{"[", "dtINT3", "]"}], "]"}], "\[NotEqual]", 
+            "\"\<XXXX\>\""}], "&&", 
+           RowBox[{"DateObjectQ", "[", 
+            RowBox[{"DateObject", "[", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"#", "[", 
+                RowBox[{"[", "dtINT3", "]"}], "]"}], ",", "dateformat3"}], 
+              "}"}], "]"}], "]"}], "&&", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"AbsoluteTime", "[", 
+               RowBox[{"DateObject", "[", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"#", "[", 
+                   RowBox[{"[", "dtINT3", "]"}], "]"}], ",", "dateformat3"}], 
+                 "}"}], "]"}], "]"}], "-", 
+              RowBox[{"AbsoluteTime", "[", 
+               RowBox[{"DateObject", "[", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"#", "[", 
+                   RowBox[{"[", "dtSIN3", "]"}], "]"}], ",", "dateformat3"}], 
+                 "}"}], "]"}], "]"}]}], "\[GreaterEqual]", 
+             RowBox[{"(*", ">", "*)"}], "0"}], ")"}], "&&", 
+           RowBox[{"(*", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"#", "[", 
+               RowBox[{"[", "EVO3", "]"}], "]"}], "\[Equal]", "2"}], "&&", 
+             RowBox[{
+              RowBox[{"#", "[", 
+               RowBox[{"[", "dtEVO3", "]"}], "]"}], "\[NotEqual]", 
+              "\"\<XXXX\>\""}], "&&", 
+             RowBox[{"DateObjectQ", "[", 
+              RowBox[{"DateObject", "[", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"#", "[", 
+                  RowBox[{"[", "dtEVO3", "]"}], "]"}], ",", "dateformat3"}], 
+                "}"}], "]"}], "]"}], "&&"}], "*)"}], 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"AbsoluteTime", "[", 
+               RowBox[{"DateObject", "[", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"#", "[", 
+                   RowBox[{"[", "dtEVO3", "]"}], "]"}], ",", "dateformat3"}], 
+                 "}"}], "]"}], "]"}], "-", 
+              RowBox[{"AbsoluteTime", "[", 
+               RowBox[{"DateObject", "[", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"#", "[", 
+                   RowBox[{"[", "dtINT3", "]"}], "]"}], ",", "dateformat3"}], 
+                 "}"}], "]"}], "]"}]}], "\[GreaterEqual]", "0"}], ")"}]}], 
+          ")"}], "&"}]}], "]"}]}], "]"}]}]}]}]], "Input",
+ CellLabel->
+  "(L1) In[79]:=",ExpressionUUID->"4777f07c-a6c0-434d-a866-836b8116b32f"]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["tauSD", "Subsection",ExpressionUUID->"cd38e6ce-30ac-4b4e-b385-3ad4af8152c8"],
+
+Cell[BoxData[
+ RowBox[{"(*", " ", 
+  RowBox[{
+   RowBox[{
+   "the", " ", "last", " ", "epicovid", " ", "phase", " ", "is", " ", "on", 
+    " ", "22", " ", "June", " ", "2020"}], ";", " ", 
+   RowBox[{
+    RowBox[{
+    "the", " ", "latter", " ", "plus", " ", "13", " ", "days", " ", "gives", 
+     " ", "5", " ", "July", " ", "2020"}], ":", " ", 
+    RowBox[{
+     RowBox[{"I", "'"}], "ll", " ", "use", " ", "this", " ", "limiting", " ", 
+     "date", " ", "to", " ", "compute", " ", "tauSD"}]}]}], " ", 
+  "*)"}]], "Input",
+ CellLabel->
+  "(L1) In[85]:=",ExpressionUUID->"79683854-0f42-4f1f-a0f9-7c49f30e9670"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "cases", " ", "that", " ", "went", " ", "to", " ", "death", " ", "before", 
+    " ", "datalimitTauSD"}], " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"datalimitTauSD", "=", 
+     RowBox[{"DateObject", "[", 
+      RowBox[{"{", 
+       RowBox[{"2020", ",", "7", ",", "5"}], "}"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"AbsoluteTiming", "@", 
+    RowBox[{"Dimensions", "[", 
+     RowBox[{"datacovid3TauSD", "=", 
+      RowBox[{"Select", "[", 
+       RowBox[{"datacovid3", ",", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"AbsoluteTime", "[", 
+             RowBox[{"DateObject", "[", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"#", "[", 
+                 RowBox[{"[", "dtEVO3", "]"}], "]"}], ",", "dateformat3"}], 
+               "}"}], "]"}], "]"}], "-", 
+            RowBox[{"AbsoluteTime", "[", "datalimitTauSD", "]"}]}], "<", 
+           "0"}], ")"}], "&"}]}], "]"}]}], "]"}]}]}]}]], "Input",
+ CellLabel->
+  "(L1) In[86]:=",ExpressionUUID->"89177d77-e051-49f4-8184-90404d58c5f1"],
+
+Cell[BoxData[{
+ RowBox[{"AbsoluteTiming", "[", 
+  RowBox[{"Dimensions", "[", 
+   RowBox[{"Deltat", "=", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"DateDifference", "[", 
+        RowBox[{
+         RowBox[{"DateObject", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"#", "[", 
+             RowBox[{"[", "dtSIN3", "]"}], "]"}], ",", "dateformat3"}], "}"}],
+           "]"}], ",", 
+         RowBox[{"DateObject", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"#", "[", 
+             RowBox[{"[", "dtEVO3", "]"}], "]"}], ",", "dateformat3"}], "}"}],
+           "]"}], ",", "\"\<Days\>\""}], "]"}], "&"}], "/@", 
+      "datacovid3TauSD"}], ")"}]}], "]"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"Mean", "[", "Deltat", "]"}], ",", 
+   RowBox[{"StandardDeviation", "[", "Deltat", "]"}]}], 
+  "}"}], "\[IndentingNewLine]", 
+ RowBox[{"vecc", "=", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"Median", "[", "Deltat", "]"}], ",", 
+    RowBox[{"InterquartileRange", "[", "Deltat", "]"}]}], 
+   "}"}]}], "\[IndentingNewLine]", 
+ RowBox[{"tauSDsivep", "=", 
+  RowBox[{"vecc", "[", 
+   RowBox[{"[", 
+    RowBox[{"1", ",", "1"}], "]"}], "]"}]}]}], "Input",
+ CellLabel->
+  "(L1) In[88]:=",ExpressionUUID->"d7e0562b-87f5-4590-8418-f4af2daf063e"],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"AbsoluteTiming", "[", 
+     RowBox[{"Dimensions", "[", 
+      RowBox[{"Deltat", "=", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"DateDifference", "[", 
+           RowBox[{
+            RowBox[{"DateObject", "[", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"#", "[", 
+                RowBox[{"[", "dtSIN", "]"}], "]"}], ",", "dateformat1"}], 
+              "}"}], "]"}], ",", 
+            RowBox[{"DateObject", "[", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"#", "[", 
+                RowBox[{"[", "dtEVO", "]"}], "]"}], ",", "dateformat1"}], 
+              "}"}], "]"}], ",", "\"\<Days\>\""}], "]"}], "&"}], "/@", 
+         "datacovid"}], ")"}]}], "]"}], "]"}], "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"Mean", "[", "Deltat", "]"}], ",", 
+      RowBox[{"StandardDeviation", "[", "Deltat", "]"}]}], "}"}], 
+    "\[IndentingNewLine]", "vecc"}], "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Median", "[", "Deltat", "]"}], ",", 
+       RowBox[{"InterquartileRange", "[", "Deltat", "]"}]}], "}"}], 
+     "\[IndentingNewLine]", "tauSDsivep"}], "=", 
+    RowBox[{"vecc", "[", 
+     RowBox[{"[", 
+      RowBox[{"1", ",", "1"}], "]"}], "]"}]}]}], "*)"}]], "Input",
+ CellLabel->
+  "(L1) In[92]:=",ExpressionUUID->"cbe3d27e-1fdd-4073-8757-362ef59bb145"],
+
+Cell[BoxData[{
+ RowBox[{"MinMax", "[", "Deltat", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"hfoda", "=", 
+  RowBox[{"Histogram", "[", 
+   RowBox[{"Deltat", ",", 
+    RowBox[{"{", "1", "}"}], ",", 
+    RowBox[{"Frame", "\[Rule]", "True"}], ",", 
+    RowBox[{"PlotRange", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"All", ",", "40"}], "}"}], ",", "All"}], "}"}]}], ",", 
+    RowBox[{"FrameStyle", "\[Rule]", "14"}], ",", 
+    RowBox[{"FrameLabel", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"None", ",", "None"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+        "\"\<\!\(\*SubscriptBox[\(t\), \(death\)]\)-\!\(\*SubscriptBox[\(t\), \
+\(severe\\\ sympt\)]\) (days)\>\"", ",", "infop"}], "}"}]}], "}"}]}], ",", 
+    RowBox[{"PlotRangeClipping", "\[Rule]", "True"}], ",", 
+    RowBox[{"AspectRatio", "\[Rule]", 
+     RowBox[{"1", "/", "2"}]}], ",", 
+    RowBox[{"Epilog", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{"Text", "[", 
+       RowBox[{
+        RowBox[{"Style", "[", 
+         RowBox[{
+          RowBox[{"Row", "[", 
+           RowBox[{"{", 
+            RowBox[{"\"\<\!\(\*SubscriptBox[\(\[Tau]\), \(d\)]\)=\>\"", ",", 
+             RowBox[{"Round", "@", 
+              RowBox[{"vecc", "[", 
+               RowBox[{"[", 
+                RowBox[{"1", ",", "1"}], "]"}], "]"}]}], ",", "\"\< (\>\"", 
+             ",", 
+             RowBox[{"Round", "@", 
+              RowBox[{"vecc", "[", 
+               RowBox[{"[", 
+                RowBox[{"2", ",", "1"}], "]"}], "]"}]}], ",", 
+             "\"\<) days\>\""}], "}"}], "]"}], ",", "18"}], "]"}], ",", 
+        RowBox[{"Scaled", "[", 
+         RowBox[{"{", 
+          RowBox[{".7", ",", ".7"}], "}"}], "]"}]}], "]"}], "}"}]}]}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Export", "[", 
+  RowBox[{
+   RowBox[{"\"\<results/run\>\"", "<>", 
+    RowBox[{"ToString", "[", "run", "]"}], "<>", "\"\</\>\"", "<>", 
+    RowBox[{"ToString", "[", "run", "]"}], "<>", "\"\<-taud-a\>\"", "<>", 
+    RowBox[{"ToString", "[", "alevel", "]"}], "<>", "\"\<-b\>\"", "<>", 
+    RowBox[{"ToString", "[", "blevel", "]"}], "<>", "\"\<-m\>\"", "<>", 
+    RowBox[{"ToString", "[", "faval", "]"}], "<>", "\"\<-f\>\"", "<>", 
+    RowBox[{"ToString", "[", "phase", "]"}], "<>", "\"\<_AgeBin\>\"", "<>", 
+    RowBox[{"ToString", "[", "ageBin", "]"}], "<>", "\"\<.pdf\>\""}], ",", 
+   "hfoda"}], "]"}]}], "Input",
+ CellLabel->
+  "(L1) In[93]:=",ExpressionUUID->"2089eec0-ea2d-49f8-af48-9dc3afe07227"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", "bootstrap", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"databs", "=", 
+     RowBox[{"QuantityMagnitude", "[", "Deltat", "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"Median", "[", "databs", "]"}], "\[IndentingNewLine]", 
+   RowBox[{"Dimensions", "[", 
+    RowBox[{"medians", "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"Median", "[", 
+        RowBox[{"RandomChoice", "[", 
+         RowBox[{"databs", ",", 
+          RowBox[{"Length", "[", "databs", "]"}]}], "]"}], "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"10", "^", "4"}], "}"}]}], "]"}]}], "]"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"Mean", "[", "medians", "]"}], ",", 
+     RowBox[{"tauderr", "=", 
+      RowBox[{"StandardDeviation", "[", "medians", "]"}]}]}], "}"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"Histogram", "[", 
+    RowBox[{"medians", ",", 
+     RowBox[{"{", "1", "}"}], ",", 
+     RowBox[{"Frame", "\[Rule]", "True"}], ",", 
+     RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+     RowBox[{"FrameStyle", "\[Rule]", "14"}], ",", 
+     RowBox[{"FrameLabel", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"None", ",", "None"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{
+         "\"\<\!\(\*SubscriptBox[\(\[Tau]\), \(d\)]\) (days)\>\"", ",", 
+          "infop"}], "}"}]}], "}"}]}], ",", 
+     RowBox[{"PlotRangeClipping", "\[Rule]", "True"}], ",", 
+     RowBox[{"AspectRatio", "\[Rule]", 
+      RowBox[{"1", "/", "2"}]}]}], "]"}]}]}]], "Input",
+ CellLabel->
+  "(L1) In[96]:=",ExpressionUUID->"687d04e9-f5fb-41ad-ac53-ad9bdee65bdf"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"tauSD", "=", 
+   RowBox[{"tauSDsivep", "+", "DeltaT"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"sigtauSD", "=", " ", 
+   RowBox[{"Round", "[", 
+    RowBox[{"Sqrt", "[", 
+     RowBox[{
+      RowBox[{"tauderr", "^", "2"}], "+", 
+      RowBox[{"sigmaDT", "^", "2"}]}], "]"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"{", 
+  RowBox[{"tauSD", ",", "sigtauSD"}], "}"}]}], "Input",
+ CellLabel->
+  "(L1) In[101]:=",ExpressionUUID->"85763038-9ce7-4b15-8b25-e5744583e38a"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"forcing", " ", "tauAD"}], "=", 
+    RowBox[{
+     RowBox[{"tauSD", "-", "tauSA"}], "=", "0"}]}], " ", "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"tauSD", "=", "tauSA"}], ";", "\[IndentingNewLine]", 
+    RowBox[{"sigtauSD", "=", "0"}], ";"}], "*)"}]}]], "Input",
+ CellLabel->
+  "(L1) In[104]:=",ExpressionUUID->"4ef4a622-a982-4d61-ab17-b261ae57cd3c"],
+
+Cell[BoxData[{
+ RowBox[{"datem", "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"dates", "=", 
+   RowBox[{"DatePlus", "[", 
+    RowBox[{"datem", ",", 
+     RowBox[{"Round", "[", 
+      RowBox[{
+       RowBox[{"-", "tauSA"}], "+", "DeltaT"}], "]"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"dates1p", "=", 
+   RowBox[{"DatePlus", "[", 
+    RowBox[{"datem", ",", 
+     RowBox[{"Round", "[", 
+      RowBox[{
+       RowBox[{"-", "tauSA"}], "+", "DeltaT", "+", "sigmaDT"}], "]"}]}], 
+    "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"dates1m", "=", 
+   RowBox[{"DatePlus", "[", 
+    RowBox[{"datem", ",", 
+     RowBox[{"Round", "[", 
+      RowBox[{
+       RowBox[{"-", "tauSA"}], "+", "DeltaT", "-", "sigmaDT"}], "]"}]}], 
+    "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"{", 
+   RowBox[{"dates", ",", "dates1p", ",", "dates1m"}], "}"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"dated", "=", 
+   RowBox[{"DatePlus", "[", 
+    RowBox[{"datem", ",", 
+     RowBox[{"Round", "[", 
+      RowBox[{
+       RowBox[{"-", "tauSA"}], "+", "tauSD"}], "]"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"datedi", "=", 
+    RowBox[{"DatePlus", "[", 
+     RowBox[{"dated", ",", 
+      RowBox[{"-", "timeab"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"dated1p", "=", 
+   RowBox[{"DatePlus", "[", 
+    RowBox[{"datem", ",", 
+     RowBox[{"Round", "[", 
+      RowBox[{
+       RowBox[{"-", "tauSA"}], "+", "tauSD", "+", "sigtauSD"}], "]"}]}], 
+    "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"dated1pi", "=", 
+    RowBox[{"DatePlus", "[", 
+     RowBox[{"dated1p", ",", 
+      RowBox[{"-", "timeab"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"dated1m", "=", 
+   RowBox[{"DatePlus", "[", 
+    RowBox[{"datem", ",", 
+     RowBox[{"Round", "[", 
+      RowBox[{
+       RowBox[{"-", "tauSA"}], "+", "tauSD", "-", "sigtauSD"}], "]"}]}], 
+    "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"dated1mi", "=", 
+   RowBox[{"DatePlus", "[", 
+    RowBox[{"dated1m", ",", 
+     RowBox[{"-", "timeab"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"{", 
+  RowBox[{"dated", ",", "dated1p", ",", "dated1m"}], "}"}]}], "Input",
+ CellLabel->
+  "(L1) In[105]:=",ExpressionUUID->"19901dcd-6581-4d41-87c2-bce4099c611f"],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{
+   RowBox[{"DeltatPDF", "=", 
+    RowBox[{"HistogramDistribution", "[", 
+     RowBox[{
+      RowBox[{"QuantityMagnitude", "[", "Deltat", "]"}], ",", 
+      RowBox[{"{", "1", "}"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Integrate", "[", 
+     RowBox[{
+      RowBox[{"PDF", "[", 
+       RowBox[{"DeltatPDF", ",", "x"}], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", "0", ",", "50"}], "}"}]}], "]"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{"Plot", "[", 
+     RowBox[{
+      RowBox[{"PDF", "[", 
+       RowBox[{"DeltatPDF", ",", "x"}], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", "0", ",", "40"}], "}"}], ",", 
+      RowBox[{"Frame", "\[Rule]", "True"}], ",", 
+      RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+      RowBox[{"FrameStyle", "\[Rule]", "14"}], ",", 
+      RowBox[{"AspectRatio", "\[Rule]", 
+       RowBox[{"1", "/", "2"}]}], ",", 
+      RowBox[{"FrameLabel", "\[Rule]", 
+       RowBox[{
+       "{", "\"\<\!\(\*SubscriptBox[\(t\), \
+\(death\)]\)-\!\(\*SubscriptBox[\(t\), \(severe\\\ sympt\)]\) (days)\>\"", 
+        "}"}]}], ",", 
+      RowBox[{"Filling", "\[Rule]", "Bottom"}]}], "]"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{"Plot", "[", 
+     RowBox[{
+      RowBox[{"CDF", "[", 
+       RowBox[{"DeltatPDF", ",", "x"}], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", "0", ",", "40"}], "}"}], ",", 
+      RowBox[{"Frame", "\[Rule]", "True"}], ",", 
+      RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+      RowBox[{"FrameStyle", "\[Rule]", "14"}], ",", 
+      RowBox[{"AspectRatio", "\[Rule]", 
+       RowBox[{"1", "/", "2"}]}], ",", 
+      RowBox[{"FrameLabel", "\[Rule]", 
+       RowBox[{
+       "{", "\"\<\!\(\*SubscriptBox[\(t\), \
+\(death\)]\)-\!\(\*SubscriptBox[\(t\), \(severe\\\ sympt\)]\) (days)\>\"", 
+        "}"}]}], ",", 
+      RowBox[{"Filling", "\[Rule]", "Bottom"}]}], "]"}]}]}], "*)"}]], "Input",\
+
+ CellLabel->
+  "(L1) In[117]:=",ExpressionUUID->"c10af996-373f-4aa3-b794-6d5d7edd3e09"],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{"pdtab", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"t", ",", 
+       RowBox[{"CDF", "[", 
+        RowBox[{"DeltatPDF", ",", "t"}], "]"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"t", ",", "0", ",", "40", ",", "1"}], "}"}]}], "]"}]}], 
+  "*)"}]], "Input",
+ CellLabel->
+  "(L1) In[118]:=",ExpressionUUID->"f5d4545f-1e16-45fb-81b6-c24949a27055"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "nd: Painel Coronav\[IAcute]rus ",
+ StyleBox["or",
+  FontColor->RGBColor[0, 0, 1]],
+ " SIVEP-Gripe"
+}], "Subsection",ExpressionUUID->"04f6bc33-1df4-47f1-a3b5-a435044865b9"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"PCfunNd", ":=", 
+    RowBox[{"(", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+       RowBox[{"entries", " ", "with", " ", 
+        RowBox[{"#", "[", 
+         RowBox[{"[", "codPa", "]"}], "]"}]}], "\[Equal]", 
+       RowBox[{
+       "\"\<\>\"", " ", "are", " ", "the", " ", "state", " ", "totals"}]}], 
+      " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+       RowBox[{"entries", " ", "with", " ", 
+        RowBox[{"#", "[", 
+         RowBox[{"[", "ufPa", "]"}], "]"}]}], "\[Equal]", 
+       RowBox[{
+       "\"\<\>\"", " ", "are", " ", "the", " ", "Brazilian", " ", "total"}]}],
+       " ", "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"selentry", "=", 
+       RowBox[{"{", 
+        RowBox[{"8", ",", "10", ",", "11", ",", "12", ",", "13", ",", "14"}], 
+        "}"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"selentry2", "=", 
+       RowBox[{"{", 
+        RowBox[{"11", ",", "12", ",", "13", ",", "14"}], "}"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"header", "[", 
+       RowBox[{"[", "selentry", "]"}], "]"}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"AbsoluteTiming", "@", 
+       RowBox[{"Which", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"alevel", "\[Equal]", "1"}], "\[IndentingNewLine]", ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"Dimensions", "[", 
+           RowBox[{"tabPa", "=", 
+            RowBox[{"Table", "[", "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"Select", "[", 
+               RowBox[{"datasaude", ",", 
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{"#", "[", 
+                    RowBox[{"[", "codPa", "]"}], "]"}], "\[Equal]", 
+                   RowBox[{"tabIBGE", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}]}], ")"}], "&"}]}], "]"}], 
+              "\[IndentingNewLine]", ",", 
+              RowBox[{"{", 
+               RowBox[{"i", ",", 
+                RowBox[{"Length", "[", "tabIBGE", "]"}]}], "}"}]}], "]"}]}], 
+           "]"}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"Length", "[", 
+              RowBox[{"DeleteDuplicates", "[", 
+               RowBox[{"tabPa", "[", 
+                RowBox[{"[", 
+                 RowBox[{"All", ",", "1", ",", "8"}], "]"}], "]"}], "]"}], 
+              "]"}], ">", "1"}], ",", 
+            RowBox[{"Print", "[", 
+             RowBox[{"Row", "[", 
+              RowBox[{"{", "\"\<Error in Painel C. - Brazil\>\"", "}"}], 
+              "]"}], "]"}]}], "]"}], ";", "\[IndentingNewLine]", 
+          "\[IndentingNewLine]", 
+          RowBox[{"Dimensions", "[", 
+           RowBox[{"datasaudeF", "=", 
+            RowBox[{"tabPa", "[", 
+             RowBox[{"[", 
+              RowBox[{"1", ",", "All", ",", "selentry"}], "]"}], "]"}]}], 
+           "]"}], ";", "\[IndentingNewLine]", 
+          RowBox[{"Dimensions", "[", 
+           RowBox[{
+            RowBox[{"datasaudeF", "[", 
+             RowBox[{"[", 
+              RowBox[{"All", ",", 
+               RowBox[{"3", ";;"}]}], "]"}], "]"}], "=", 
+            RowBox[{"Total", "[", 
+             RowBox[{
+              RowBox[{"tabPa", "[", 
+               RowBox[{"[", 
+                RowBox[{"All", ",", "All", ",", "selentry2"}], "]"}], "]"}], 
+              ",", 
+              RowBox[{"{", "1", "}"}]}], "]"}]}], "]"}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"Dimensions", "[", "datasaudeF", "]"}]}], 
+         "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+         RowBox[{"alevel", "\[Equal]", "2"}], "\[IndentingNewLine]", ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"Dimensions", "[", 
+           RowBox[{"tabPa", "=", 
+            RowBox[{"Table", "[", "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"Select", "[", 
+               RowBox[{"datasaude", ",", 
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{"#", "[", 
+                    RowBox[{"[", "codPa", "]"}], "]"}], "\[Equal]", 
+                   RowBox[{"tabIBGE", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}]}], ")"}], "&"}]}], "]"}], 
+              "\[IndentingNewLine]", ",", 
+              RowBox[{"{", 
+               RowBox[{"i", ",", 
+                RowBox[{"Length", "[", "tabIBGE", "]"}]}], "}"}]}], "]"}]}], 
+           "]"}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"Length", "[", 
+              RowBox[{"DeleteDuplicates", "[", 
+               RowBox[{"tabPa", "[", 
+                RowBox[{"[", 
+                 RowBox[{"All", ",", "1", ",", "8"}], "]"}], "]"}], "]"}], 
+              "]"}], ">", "1"}], ",", 
+            RowBox[{"Print", "[", 
+             RowBox[{"Row", "[", 
+              RowBox[{"{", 
+               RowBox[{"\"\<Error in Painel C. stacking: \>\"", ",", 
+                RowBox[{"{", 
+                 RowBox[{"blevel", ",", 
+                  RowBox[{"states", "[", 
+                   RowBox[{"[", "blevel", "]"}], "]"}]}], "}"}]}], "}"}], 
+              "]"}], "]"}]}], "]"}], ";", "\[IndentingNewLine]", 
+          "\[IndentingNewLine]", 
+          RowBox[{"Dimensions", "[", 
+           RowBox[{"datasaudeF", "=", 
+            RowBox[{"tabPa", "[", 
+             RowBox[{"[", 
+              RowBox[{"1", ",", "All", ",", "selentry"}], "]"}], "]"}]}], 
+           "]"}], ";", "\[IndentingNewLine]", 
+          RowBox[{"Dimensions", "[", 
+           RowBox[{
+            RowBox[{"datasaudeF", "[", 
+             RowBox[{"[", 
+              RowBox[{"All", ",", 
+               RowBox[{"3", ";;"}]}], "]"}], "]"}], "=", 
+            RowBox[{"Total", "[", 
+             RowBox[{
+              RowBox[{"tabPa", "[", 
+               RowBox[{"[", 
+                RowBox[{"All", ",", "All", ",", "selentry2"}], "]"}], "]"}], 
+              ",", 
+              RowBox[{"{", "1", "}"}]}], "]"}]}], "]"}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"Dimensions", "[", "datasaudeF", "]"}]}], 
+         "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+         RowBox[{"alevel", "\[Equal]", "3"}], "\[IndentingNewLine]", ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"Dimensions", "[", 
+           RowBox[{"datasaudeF", "=", 
+            RowBox[{"Select", "[", 
+             RowBox[{"datasaude", ",", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"#", "[", 
+                  RowBox[{"[", "codPa", "]"}], "]"}], "\[Equal]", "bIBGE"}], 
+                ")"}], "&"}]}], "]"}]}], "]"}], ";", "\[IndentingNewLine]", 
+          RowBox[{"Dimensions", "[", 
+           RowBox[{"datasaudeF", "=", 
+            RowBox[{"datasaudeF", "[", 
+             RowBox[{"[", 
+              RowBox[{"All", ",", "selentry"}], "]"}], "]"}]}], "]"}]}]}], 
+        "\[IndentingNewLine]", "]"}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Dimensions", "[", 
+       RowBox[{"obDataPC", "=", 
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"DateObject", "[", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"datasaudeF", "[", 
+                RowBox[{"[", 
+                 RowBox[{"i", ",", "1"}], "]"}], "]"}], ",", "dateformatPC"}],
+               "}"}], "]"}], ",", 
+            RowBox[{"datasaudeF", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", ",", 
+               RowBox[{"-", "1"}]}], "]"}], "]"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", 
+            RowBox[{"Length", "[", "datasaudeF", "]"}]}], "}"}]}], "]"}]}], 
+       "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"plabelndPC", "=", "\"\<Painel Coronav\[IAcute]rus\>\""}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"expoPC", "=", "\"\<-PC\>\""}], ";", "\[IndentingNewLine]", 
+      RowBox[{"dbinPC", "=", "20"}], ";", " ", 
+      RowBox[{"(*", " ", 
+       RowBox[{"moving", " ", 
+        RowBox[{"av", ":", " ", 
+         RowBox[{"[", 
+          RowBox[{"t0", ",", " ", 
+           RowBox[{"t0", "+", "dbin", "-", "1"}]}], "]"}]}]}], " ", "*)"}], 
+      "\[IndentingNewLine]", 
+      RowBox[{"TableForm", "[", 
+       RowBox[{
+        RowBox[{"datasaudeF", "[", 
+         RowBox[{"[", 
+          RowBox[{
+           RowBox[{"-", "10"}], ";;"}], "]"}], "]"}], ",", 
+        RowBox[{"TableHeadings", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{"None", ",", " ", 
+           RowBox[{"header", "[", 
+            RowBox[{"[", "selentry", "]"}], "]"}]}], "}"}]}]}], "]"}]}], 
+     "\[IndentingNewLine]", ")"}]}], ";"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"SGfunNd", ":=", 
+     RowBox[{"(", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Dimensions", "[", 
+        RowBox[{"datacovidOb", "=", 
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{"DateObject", "[", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"datacovidXXX", "[", 
+               RowBox[{"[", 
+                RowBox[{"i", ",", "dtEVO"}], "]"}], "]"}], ",", 
+              "dateformat1"}], "}"}], "]"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"i", ",", 
+             RowBox[{"Length", "[", "datacovidXXX", "]"}]}], "}"}]}], "]"}]}],
+         "]"}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{"(*", " ", 
+        RowBox[{
+         RowBox[{"undocumented", " ", "function"}], " ", "-", " ", 
+         RowBox[{
+         "needs", " ", "to", " ", "run", " ", "a", " ", "little", " ", "to", 
+          " ", "wake", " ", "up"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+       RowBox[{"dates", "=", 
+        RowBox[{"AbsoluteTime", "/@", 
+         RowBox[{"RandomChoice", "[", 
+          RowBox[{
+           RowBox[{"DateRange", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"2010", ",", "1", ",", "1"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"2010", ",", "5", ",", "31"}], "}"}], ",", 
+             "\"\<Day\>\""}], "]"}], ",", "200"}], "]"}]}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"bSpec", "=", "\"\<Month\>\""}], ";", "\[IndentingNewLine]", 
+       RowBox[{"Quiet", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"binSpec", "=", 
+          RowBox[{"System`TimeVisualizationsDump`dateHistogramBinning", "[", 
+           RowBox[{"dates", ",", "bSpec", ",", "Identity", ",", 
+            RowBox[{"(*", 
+             RowBox[{
+              RowBox[{"smoothing", " ", "function"}], "-", 
+              RowBox[{
+              "at", " ", "least", " ", "the", " ", "pattern", " ", "name", 
+               " ", "says", " ", "so"}]}], "*)"}], "$TimeZone"}], "]"}]}], 
+         ";", "\[IndentingNewLine]", 
+         RowBox[{"hlist", "=", 
+          RowBox[{"HistogramList", "[", 
+           RowBox[{"dates", ",", "binSpec"}], "]"}]}], ";"}], 
+        "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"BarChart", "[", 
+            RowBox[{"#2", ",", 
+             RowBox[{"ChartLabels", "\[Rule]", 
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"DateString", "[", 
+                  RowBox[{"#", ",", "\"\<MonthNameShort\>\""}], "]"}], "&"}], 
+                "/@", "#"}], ")"}]}]}], "]"}], "&"}], "@@", "hlist"}], ",", 
+         RowBox[{"DateHistogram", "[", 
+          RowBox[{"dates", ",", "bSpec"}], "]"}]}], "}"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"binSpec", "=", 
+        RowBox[{"System`TimeVisualizationsDump`dateHistogramBinning", "[", 
+         RowBox[{"dates", ",", "bSpec", ",", "Identity", ",", 
+          RowBox[{"(*", 
+           RowBox[{
+            RowBox[{"smoothing", " ", "function"}], "-", 
+            RowBox[{
+            "at", " ", "least", " ", "the", " ", "pattern", " ", "name", " ", 
+             "says", " ", "so"}]}], "*)"}], "$TimeZone"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"hlist", "=", 
+        RowBox[{"HistogramList", "[", 
+         RowBox[{"dates", ",", "binSpec"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"BarChart", "[", 
+            RowBox[{"#2", ",", 
+             RowBox[{"ChartLabels", "\[Rule]", 
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"DateString", "[", 
+                  RowBox[{"#", ",", "\"\<MonthNameShort\>\""}], "]"}], "&"}], 
+                "/@", "#"}], ")"}]}]}], "]"}], "&"}], "@@", "hlist"}], ",", 
+         RowBox[{"DateHistogram", "[", 
+          RowBox[{"dates", ",", "bSpec"}], "]"}]}], "}"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", " ", 
+        RowBox[{
+        "end", " ", "of", " ", "undocumented", " ", "function", " ", "waking",
+          " ", "up"}], " ", "*)"}], "\[IndentingNewLine]", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Dimensions", "[", 
+        RowBox[{"datesOB", "=", 
+         RowBox[{"AbsoluteTime", "/@", "datacovidOb"}]}], "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"bSpec", "=", "\"\<Day\>\""}], ";", "\[IndentingNewLine]", 
+       RowBox[{"binSpec", "=", 
+        RowBox[{"System`TimeVisualizationsDump`dateHistogramBinning", "[", 
+         RowBox[{"datesOB", ",", "bSpec", ",", "Identity", ",", "$TimeZone"}],
+          "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"hlist", "=", 
+        RowBox[{"HistogramList", "[", 
+         RowBox[{"datesOB", ",", "binSpec"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{
+         RowBox[{"Length", "[", 
+          RowBox[{"hlistbc", "=", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"hlist", "[", 
+               RowBox[{"[", 
+                RowBox[{"1", ",", 
+                 RowBox[{"2", ";;"}]}], "]"}], "]"}], "+", 
+              RowBox[{"hlist", "[", 
+               RowBox[{"[", 
+                RowBox[{"1", ",", 
+                 RowBox[{";;", 
+                  RowBox[{"-", "2"}]}]}], "]"}], "]"}]}], ")"}], "/", "2"}]}],
+           "]"}], ";"}], "*)"}], "\[IndentingNewLine]", 
+       RowBox[{"Length", "[", 
+        RowBox[{"hlistbc", "=", 
+         RowBox[{"hlist", "[", 
+          RowBox[{"[", 
+           RowBox[{"1", ",", 
+            RowBox[{";;", 
+             RowBox[{"-", "2"}]}]}], "]"}], "]"}]}], "]"}], ";", " ", 
+       RowBox[{"(*", " ", 
+        RowBox[{
+        "this", " ", "choice", " ", "reproduces", " ", "the", " ", 
+         "histogram"}], " ", "*)"}], "\[IndentingNewLine]", 
+       RowBox[{"Dimensions", "[", 
+        RowBox[{"obDataSG", "=", 
+         RowBox[{"Thread", "[", 
+          RowBox[{"{", 
+           RowBox[{"hlistbc", ",", 
+            RowBox[{"hlist", "[", 
+             RowBox[{"[", "2", "]"}], "]"}]}], "}"}], "]"}]}], "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"plabelndSG", "=", "\"\<SIVEP-Gripe\>\""}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"expoSG", "=", "\"\<-SG\>\""}], ";", "\[IndentingNewLine]", 
+       RowBox[{"dbinSG", "=", "1"}], ";", " ", 
+       RowBox[{"(*", " ", 
+        RowBox[{"moving", " ", 
+         RowBox[{"av", ":", " ", 
+          RowBox[{"[", 
+           RowBox[{"t0", ",", " ", 
+            RowBox[{"t0", "+", "dbin", "-", "1"}]}], "]"}]}]}], " ", "*)"}], 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", " ", 
+        RowBox[{
+         RowBox[{"1", ":", " ", "cura"}], ",", " ", 
+         RowBox[{"2", ":", " ", "\[OAcute]bito"}]}], " ", "*)"}], 
+       "\[IndentingNewLine]", 
+       RowBox[{"TableForm", "[", 
+        RowBox[{
+         RowBox[{"datacovidXXX", "[", 
+          RowBox[{"[", 
+           RowBox[{
+            RowBox[{";;", "5"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"dtEVO", ",", "EVO"}], "}"}]}], "]"}], "]"}], ",", 
+         RowBox[{"TableHeadings", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{"None", ",", " ", 
+            RowBox[{"header4", "[", 
+             RowBox[{"[", 
+              RowBox[{"{", 
+               RowBox[{"dtEVO", ",", "EVO"}], "}"}], "]"}], "]"}]}], 
+           "}"}]}]}], "]"}]}], "\[IndentingNewLine]", ")"}]}], ";"}], "*)"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"SGfunNd2", ":=", 
+     RowBox[{"(", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Dimensions", "[", 
+        RowBox[{"datacovidOb2", "=", 
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{"DateObject", "[", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"datacovidXXX2", "[", 
+               RowBox[{"[", 
+                RowBox[{"i", ",", "dtEVO2"}], "]"}], "]"}], ",", 
+              "dateformat2"}], "}"}], "]"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"i", ",", 
+             RowBox[{"Length", "[", "datacovidXXX2", "]"}]}], "}"}]}], 
+          "]"}]}], "]"}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{"(*", " ", 
+        RowBox[{
+         RowBox[{"undocumented", " ", "function"}], " ", "-", " ", 
+         RowBox[{
+         "needs", " ", "to", " ", "run", " ", "a", " ", "little", " ", "to", 
+          " ", "wake", " ", "up"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+       RowBox[{"dates", "=", 
+        RowBox[{"AbsoluteTime", "/@", 
+         RowBox[{"RandomChoice", "[", 
+          RowBox[{
+           RowBox[{"DateRange", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"2010", ",", "1", ",", "1"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"2010", ",", "5", ",", "31"}], "}"}], ",", 
+             "\"\<Day\>\""}], "]"}], ",", "200"}], "]"}]}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"bSpec", "=", "\"\<Month\>\""}], ";", "\[IndentingNewLine]", 
+       RowBox[{"Quiet", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"binSpec", "=", 
+          RowBox[{"System`TimeVisualizationsDump`dateHistogramBinning", "[", 
+           RowBox[{"dates", ",", "bSpec", ",", "Identity", ",", 
+            RowBox[{"(*", 
+             RowBox[{
+              RowBox[{"smoothing", " ", "function"}], "-", 
+              RowBox[{
+              "at", " ", "least", " ", "the", " ", "pattern", " ", "name", 
+               " ", "says", " ", "so"}]}], "*)"}], "$TimeZone"}], "]"}]}], 
+         ";", "\[IndentingNewLine]", 
+         RowBox[{"hlist", "=", 
+          RowBox[{"HistogramList", "[", 
+           RowBox[{"dates", ",", "binSpec"}], "]"}]}], ";"}], 
+        "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"BarChart", "[", 
+            RowBox[{"#2", ",", 
+             RowBox[{"ChartLabels", "\[Rule]", 
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"DateString", "[", 
+                  RowBox[{"#", ",", "\"\<MonthNameShort\>\""}], "]"}], "&"}], 
+                "/@", "#"}], ")"}]}]}], "]"}], "&"}], "@@", "hlist"}], ",", 
+         RowBox[{"DateHistogram", "[", 
+          RowBox[{"dates", ",", "bSpec"}], "]"}]}], "}"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"binSpec", "=", 
+        RowBox[{"System`TimeVisualizationsDump`dateHistogramBinning", "[", 
+         RowBox[{"dates", ",", "bSpec", ",", "Identity", ",", 
+          RowBox[{"(*", 
+           RowBox[{
+            RowBox[{"smoothing", " ", "function"}], "-", 
+            RowBox[{
+            "at", " ", "least", " ", "the", " ", "pattern", " ", "name", " ", 
+             "says", " ", "so"}]}], "*)"}], "$TimeZone"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"hlist", "=", 
+        RowBox[{"HistogramList", "[", 
+         RowBox[{"dates", ",", "binSpec"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"BarChart", "[", 
+            RowBox[{"#2", ",", 
+             RowBox[{"ChartLabels", "\[Rule]", 
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"DateString", "[", 
+                  RowBox[{"#", ",", "\"\<MonthNameShort\>\""}], "]"}], "&"}], 
+                "/@", "#"}], ")"}]}]}], "]"}], "&"}], "@@", "hlist"}], ",", 
+         RowBox[{"DateHistogram", "[", 
+          RowBox[{"dates", ",", "bSpec"}], "]"}]}], "}"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", " ", 
+        RowBox[{
+        "end", " ", "of", " ", "undocumented", " ", "function", " ", "waking",
+          " ", "up"}], " ", "*)"}], "\[IndentingNewLine]", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Dimensions", "[", 
+        RowBox[{"datesOB2", "=", 
+         RowBox[{"AbsoluteTime", "/@", "datacovidOb2"}]}], "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"bSpec", "=", "\"\<Day\>\""}], ";", "\[IndentingNewLine]", 
+       RowBox[{"binSpec", "=", 
+        RowBox[{"System`TimeVisualizationsDump`dateHistogramBinning", "[", 
+         RowBox[{
+         "datesOB2", ",", "bSpec", ",", "Identity", ",", "$TimeZone"}], 
+         "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"hlist", "=", 
+        RowBox[{"HistogramList", "[", 
+         RowBox[{"datesOB2", ",", "binSpec"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{
+         RowBox[{"Length", "[", 
+          RowBox[{"hlistbc", "=", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"hlist", "[", 
+               RowBox[{"[", 
+                RowBox[{"1", ",", 
+                 RowBox[{"2", ";;"}]}], "]"}], "]"}], "+", 
+              RowBox[{"hlist", "[", 
+               RowBox[{"[", 
+                RowBox[{"1", ",", 
+                 RowBox[{";;", 
+                  RowBox[{"-", "2"}]}]}], "]"}], "]"}]}], ")"}], "/", "2"}]}],
+           "]"}], ";"}], "*)"}], "\[IndentingNewLine]", 
+       RowBox[{"Length", "[", 
+        RowBox[{"hlistbc", "=", 
+         RowBox[{"hlist", "[", 
+          RowBox[{"[", 
+           RowBox[{"1", ",", 
+            RowBox[{";;", 
+             RowBox[{"-", "2"}]}]}], "]"}], "]"}]}], "]"}], ";", " ", 
+       RowBox[{"(*", " ", 
+        RowBox[{
+        "this", " ", "choice", " ", "reproduces", " ", "the", " ", 
+         "histogram"}], " ", "*)"}], "\[IndentingNewLine]", 
+       RowBox[{"Dimensions", "[", 
+        RowBox[{"obDataSG2", "=", 
+         RowBox[{"Thread", "[", 
+          RowBox[{"{", 
+           RowBox[{"hlistbc", ",", 
+            RowBox[{"hlist", "[", 
+             RowBox[{"[", "2", "]"}], "]"}]}], "}"}], "]"}]}], "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"plabelndSG2", "=", "\"\<SIVEP-Gripe2\>\""}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"expoSG2", "=", "\"\<-SG2\>\""}], ";", "\[IndentingNewLine]", 
+       RowBox[{"dbinSG2", "=", "1"}], ";", " ", 
+       RowBox[{"(*", " ", 
+        RowBox[{"moving", " ", 
+         RowBox[{"av", ":", " ", 
+          RowBox[{"[", 
+           RowBox[{"t0", ",", " ", 
+            RowBox[{"t0", "+", "dbin", "-", "1"}]}], "]"}]}]}], " ", "*)"}], 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", " ", 
+        RowBox[{
+         RowBox[{"1", ":", " ", "cura"}], ",", " ", 
+         RowBox[{"2", ":", " ", "\[OAcute]bito"}]}], " ", "*)"}], 
+       "\[IndentingNewLine]", 
+       RowBox[{"TableForm", "[", 
+        RowBox[{
+         RowBox[{"datacovidXXX2", "[", 
+          RowBox[{"[", 
+           RowBox[{
+            RowBox[{";;", "5"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"dtEVO2", ",", "EVO2"}], "}"}]}], "]"}], "]"}], ",", 
+         RowBox[{"TableHeadings", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{"None", ",", " ", 
+            RowBox[{"header5", "[", 
+             RowBox[{"[", 
+              RowBox[{"{", 
+               RowBox[{"dtEVO2", ",", "EVO2"}], "}"}], "]"}], "]"}]}], 
+           "}"}]}]}], "]"}]}], "\[IndentingNewLine]", ")"}]}], ";"}], "*)"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"SGfunNd3", ":=", 
+   RowBox[{"(", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Dimensions", "[", 
+      RowBox[{"datacovidOb3", "=", 
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"DateObject", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"datacovidXXX3", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", ",", "dtEVO3"}], "]"}], "]"}], ",", 
+            "dateformat3"}], "}"}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"i", ",", 
+           RowBox[{"Length", "[", "datacovidXXX3", "]"}]}], "}"}]}], "]"}]}], 
+      "]"}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+       RowBox[{"undocumented", " ", "function"}], " ", "-", " ", 
+       RowBox[{
+       "needs", " ", "to", " ", "run", " ", "a", " ", "little", " ", "to", 
+        " ", "wake", " ", "up"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"dates", "=", 
+      RowBox[{"AbsoluteTime", "/@", 
+       RowBox[{"RandomChoice", "[", 
+        RowBox[{
+         RowBox[{"DateRange", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"2010", ",", "1", ",", "1"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"2010", ",", "5", ",", "31"}], "}"}], ",", 
+           "\"\<Day\>\""}], "]"}], ",", "200"}], "]"}]}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"bSpec", "=", "\"\<Month\>\""}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Quiet", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"binSpec", "=", 
+        RowBox[{"System`TimeVisualizationsDump`dateHistogramBinning", "[", 
+         RowBox[{"dates", ",", "bSpec", ",", "Identity", ",", 
+          RowBox[{"(*", 
+           RowBox[{
+            RowBox[{"smoothing", " ", "function"}], "-", 
+            RowBox[{
+            "at", " ", "least", " ", "the", " ", "pattern", " ", "name", " ", 
+             "says", " ", "so"}]}], "*)"}], "$TimeZone"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"hlist", "=", 
+        RowBox[{"HistogramList", "[", 
+         RowBox[{"dates", ",", "binSpec"}], "]"}]}], ";"}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"BarChart", "[", 
+          RowBox[{"#2", ",", 
+           RowBox[{"ChartLabels", "\[Rule]", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"DateString", "[", 
+                RowBox[{"#", ",", "\"\<MonthNameShort\>\""}], "]"}], "&"}], "/@",
+               "#"}], ")"}]}]}], "]"}], "&"}], "@@", "hlist"}], ",", 
+       RowBox[{"DateHistogram", "[", 
+        RowBox[{"dates", ",", "bSpec"}], "]"}]}], "}"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"binSpec", "=", 
+      RowBox[{"System`TimeVisualizationsDump`dateHistogramBinning", "[", 
+       RowBox[{"dates", ",", "bSpec", ",", "Identity", ",", 
+        RowBox[{"(*", 
+         RowBox[{
+          RowBox[{"smoothing", " ", "function"}], "-", 
+          RowBox[{
+          "at", " ", "least", " ", "the", " ", "pattern", " ", "name", " ", 
+           "says", " ", "so"}]}], "*)"}], "$TimeZone"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"hlist", "=", 
+      RowBox[{"HistogramList", "[", 
+       RowBox[{"dates", ",", "binSpec"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"BarChart", "[", 
+          RowBox[{"#2", ",", 
+           RowBox[{"ChartLabels", "\[Rule]", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"DateString", "[", 
+                RowBox[{"#", ",", "\"\<MonthNameShort\>\""}], "]"}], "&"}], "/@",
+               "#"}], ")"}]}]}], "]"}], "&"}], "@@", "hlist"}], ",", 
+       RowBox[{"DateHistogram", "[", 
+        RowBox[{"dates", ",", "bSpec"}], "]"}]}], "}"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "end", " ", "of", " ", "undocumented", " ", "function", " ", "waking", 
+       " ", "up"}], " ", "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     RowBox[{"Dimensions", "[", 
+      RowBox[{"datesOB3", "=", 
+       RowBox[{"AbsoluteTime", "/@", "datacovidOb3"}]}], "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"bSpec", "=", "\"\<Day\>\""}], ";", "\[IndentingNewLine]", 
+     RowBox[{"binSpec", "=", 
+      RowBox[{"System`TimeVisualizationsDump`dateHistogramBinning", "[", 
+       RowBox[{"datesOB3", ",", "bSpec", ",", "Identity", ",", "$TimeZone"}], 
+       "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"hlist", "=", 
+      RowBox[{"HistogramList", "[", 
+       RowBox[{"datesOB3", ",", "binSpec"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"(*", 
+      RowBox[{
+       RowBox[{"Length", "[", 
+        RowBox[{"hlistbc", "=", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"hlist", "[", 
+             RowBox[{"[", 
+              RowBox[{"1", ",", 
+               RowBox[{"2", ";;"}]}], "]"}], "]"}], "+", 
+            RowBox[{"hlist", "[", 
+             RowBox[{"[", 
+              RowBox[{"1", ",", 
+               RowBox[{";;", 
+                RowBox[{"-", "2"}]}]}], "]"}], "]"}]}], ")"}], "/", "2"}]}], 
+        "]"}], ";"}], "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"Length", "[", 
+      RowBox[{"hlistbc", "=", 
+       RowBox[{"hlist", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", 
+          RowBox[{";;", 
+           RowBox[{"-", "2"}]}]}], "]"}], "]"}]}], "]"}], ";", " ", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "this", " ", "choice", " ", "reproduces", " ", "the", " ", 
+       "histogram"}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"Dimensions", "[", 
+      RowBox[{"obDataSG3", "=", 
+       RowBox[{"Thread", "[", 
+        RowBox[{"{", 
+         RowBox[{"hlistbc", ",", 
+          RowBox[{"hlist", "[", 
+           RowBox[{"[", "2", "]"}], "]"}]}], "}"}], "]"}]}], "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"plabelndSG3", "=", "\"\<SIVEP-Gripe3\>\""}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"expoSG3", "=", "\"\<-SG3\>\""}], ";", "\[IndentingNewLine]", 
+     RowBox[{"dbinSG3", "=", "2"}], ";", " ", 
+     RowBox[{"(*", " ", 
+      RowBox[{"moving", " ", 
+       RowBox[{"av", ":", " ", 
+        RowBox[{"[", 
+         RowBox[{"t0", ",", " ", 
+          RowBox[{"t0", "+", "dbin", "-", "1"}]}], "]"}]}]}], " ", "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+       RowBox[{"1", ":", " ", "cura"}], ",", " ", 
+       RowBox[{"2", ":", " ", "\[OAcute]bito"}]}], " ", "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"TableForm", "[", 
+      RowBox[{
+       RowBox[{"datacovidXXX3", "[", 
+        RowBox[{"[", 
+         RowBox[{
+          RowBox[{";;", "5"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"dtEVO3", ",", "EVO3"}], "}"}]}], "]"}], "]"}], ",", 
+       RowBox[{"TableHeadings", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"None", ",", " ", 
+          RowBox[{"header6", "[", 
+           RowBox[{"[", 
+            RowBox[{"{", 
+             RowBox[{"dtEVO3", ",", "EVO3"}], "}"}], "]"}], "]"}]}], 
+         "}"}]}]}], "]"}]}], "\[IndentingNewLine]", ")"}]}], ";"}]}], "Input",\
+
+ CellLabel->
+  "(L1) In[119]:=",ExpressionUUID->"e353b4d1-8175-4bc8-b738-334636c67110"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"PlotfunNd", "[", 
+     RowBox[{"ob_", ",", "dbin_", ",", "lbl_", ",", "exp_", ",", "cor_"}], 
+     "]"}], ":=", 
+    RowBox[{"(", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"Dimensions", "[", 
+       RowBox[{"obDataS", "=", 
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"ob", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", ",", "1"}], "]"}], "]"}], ",", 
+            RowBox[{"Mean", "[", 
+             RowBox[{"ob", "[", 
+              RowBox[{"[", 
+               RowBox[{
+                RowBox[{"Range", "[", 
+                 RowBox[{"i", ",", 
+                  RowBox[{"i", "+", "dbin", "-", "1"}]}], "]"}], ",", "2"}], 
+               "]"}], "]"}], "]"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", "1", ",", 
+            RowBox[{
+             RowBox[{"Length", "[", "ob", "]"}], "-", 
+             RowBox[{"(", 
+              RowBox[{"dbin", "-", "1"}], ")"}]}], ",", "1"}], 
+           RowBox[{"(*", "dbin", "*)"}], "}"}]}], "]"}]}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"dapo", "=", 
+       RowBox[{"DateListStepPlot", "[", 
+        RowBox[{"obDataS", ",", 
+         RowBox[{"Frame", "\[Rule]", "True"}], ",", 
+         RowBox[{"FrameStyle", "\[Rule]", "14"}], ",", 
+         RowBox[{"PlotRangeClipping", "\[Rule]", "True"}], ",", 
+         RowBox[{"AspectRatio", "\[Rule]", 
+          RowBox[{"1", "/", "2"}]}], ",", 
+         RowBox[{"(*", 
+          RowBox[{
+           RowBox[{"GridLines", "\[Rule]", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"datei", ",", "datef"}], "}"}], ",", " ", "None"}], 
+             "}"}]}], ",", 
+           RowBox[{"GridLinesStyle", "\[Rule]", 
+            RowBox[{"Directive", "[", 
+             RowBox[{"Blue", ",", 
+              RowBox[{"Thickness", "[", ".005", "]"}], ",", "Dashed"}], 
+             "]"}]}], ",", 
+           RowBox[{"Method", "\[Rule]", 
+            RowBox[{"{", 
+             RowBox[{"\"\<GridLinesInFront\>\"", "\[Rule]", "True"}], "}"}]}],
+            ","}], "*)"}], 
+         RowBox[{"PlotRange", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"DateObject", "[", 
+               RowBox[{"{", 
+                RowBox[{"2020", ",", "4", ",", "1"}], "}"}], "]"}], ",", 
+              "datapainel"}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"0", ",", "All"}], "}"}]}], "}"}]}], ",", 
+         RowBox[{"PlotStyle", "\[Rule]", "cor"}], ",", 
+         RowBox[{"PlotLegends", "\[Rule]", 
+          RowBox[{"Placed", "[", 
+           RowBox[{
+            RowBox[{"{", "lbl", "}"}], ",", "Above"}], "]"}]}], ",", 
+         RowBox[{"Epilog", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"Text", "[", 
+             RowBox[{
+              RowBox[{"Style", "[", 
+               RowBox[{
+               "\"\<\!\(\*SubscriptBox[\(dn\), \(d\)]\)/dt\>\"", ",", 
+                RowBox[{"FontSize", "\[Rule]", "15"}], ",", 
+                RowBox[{"TextAlignment", "\[Rule]", "Left"}]}], "]"}], ",", 
+              RowBox[{"Scaled", "[", 
+               RowBox[{"{", 
+                RowBox[{".25", ",", ".7"}], "}"}], "]"}]}], "]"}], ",", 
+            RowBox[{"EdgeForm", "[", "None", "]"}], ",", 
+            RowBox[{"Opacity", "[", ".2", "]"}], ",", "Blue", ",", 
+            RowBox[{"Rectangle", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"datei", ",", "0"}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"datef", ",", "10000"}], "}"}]}], "]"}]}], "}"}]}], 
+         ",", 
+         RowBox[{"Filling", "\[Rule]", "Bottom"}], ",", 
+         RowBox[{"FrameLabel", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"None", ",", "None"}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"Automatic", ",", "infop"}], "}"}]}], "}"}]}]}], "]"}]}],
+       ";", "\[IndentingNewLine]", 
+      RowBox[{"Export", "[", 
+       RowBox[{
+        RowBox[{"\"\<results/run\>\"", "<>", 
+         RowBox[{"ToString", "[", "run", "]"}], "<>", "\"\</\>\"", "<>", 
+         RowBox[{"ToString", "[", "run", "]"}], "<>", "\"\<-nd-a\>\"", "<>", 
+         RowBox[{"ToString", "[", "alevel", "]"}], "<>", "\"\<-b\>\"", "<>", 
+         RowBox[{"ToString", "[", "blevel", "]"}], "<>", "\"\<-m\>\"", "<>", 
+         RowBox[{"ToString", "[", "faval", "]"}], "<>", "\"\<-f\>\"", "<>", 
+         RowBox[{"ToString", "[", "phase", "]"}], "<>", "exp", "<>", 
+         "\"\<_AgeBin\>\"", "<>", 
+         RowBox[{"ToString", "[", "ageBin", "]"}], "<>", "\"\<.pdf\>\""}], 
+        ",", "dapo"}], "]"}], ";", "\[IndentingNewLine]", "dapo"}], 
+     "\[IndentingNewLine]", ")"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"funNd", "[", 
+    RowBox[{"ob_", ",", "dbin_"}], "]"}], ":=", 
+   RowBox[{"(", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Dimensions", "[", 
+      RowBox[{"obDataS", "=", 
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"ob", "[", 
+            RowBox[{"[", 
+             RowBox[{"i", ",", "1"}], "]"}], "]"}], ",", 
+           RowBox[{"Mean", "[", 
+            RowBox[{"ob", "[", 
+             RowBox[{"[", 
+              RowBox[{
+               RowBox[{"Range", "[", 
+                RowBox[{"i", ",", 
+                 RowBox[{"i", "+", "dbin", "-", "1"}]}], "]"}], ",", "2"}], 
+              "]"}], "]"}], "]"}]}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"i", ",", "1", ",", 
+           RowBox[{
+            RowBox[{"Length", "[", "ob", "]"}], "-", 
+            RowBox[{"(", 
+             RowBox[{"dbin", "-", "1"}], ")"}]}], ",", "1"}], 
+          RowBox[{"(*", "dbin", "*)"}], "}"}]}], "]"}]}], "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"auxx", "=", 
+      RowBox[{"AbsoluteTime", "/@", 
+       RowBox[{"obDataS", "[", 
+        RowBox[{"[", 
+         RowBox[{"All", ",", "1"}], "]"}], "]"}]}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"obpo", "=", 
+      RowBox[{
+       RowBox[{"Position", "[", 
+        RowBox[{"auxx", ",", 
+         RowBox[{"_", "?", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"AbsoluteTime", "[", "dated", "]"}], "-", "#"}], 
+             "\[Equal]", "0"}], "&"}], ")"}]}]}], "]"}], "[", 
+       RowBox[{"[", 
+        RowBox[{"1", ",", "1"}], "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"obpo1p", "=", 
+      RowBox[{
+       RowBox[{"Position", "[", 
+        RowBox[{"auxx", ",", 
+         RowBox[{"_", "?", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"AbsoluteTime", "[", "dated1p", "]"}], "-", "#"}], 
+             "\[Equal]", "0"}], "&"}], ")"}]}]}], "]"}], "[", 
+       RowBox[{"[", 
+        RowBox[{"1", ",", "1"}], "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"obpo1m", "=", 
+      RowBox[{
+       RowBox[{"Position", "[", 
+        RowBox[{"auxx", ",", 
+         RowBox[{"_", "?", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"AbsoluteTime", "[", "dated1m", "]"}], "-", "#"}], 
+             "\[Equal]", "0"}], "&"}], ")"}]}]}], "]"}], "[", 
+       RowBox[{"[", 
+        RowBox[{"1", ",", "1"}], "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     "\[IndentingNewLine]", 
+     RowBox[{"If", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"AbsoluteTime", "[", "dated1mi", "]"}], "<", 
+        RowBox[{"AbsoluteTime", "[", 
+         RowBox[{"obDataS", "[", 
+          RowBox[{"[", 
+           RowBox[{"1", ",", "1"}], "]"}], "]"}], "]"}]}], 
+       "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"obpoi", "=", "1"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"obpo1pi", "=", "1"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"obpo1mi", "=", "1"}], ";"}], "\[IndentingNewLine]", ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"obpoi", "=", 
+         RowBox[{
+          RowBox[{"Position", "[", 
+           RowBox[{"auxx", ",", 
+            RowBox[{"_", "?", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{"AbsoluteTime", "[", "datedi", "]"}], "-", "#"}], 
+                "\[Equal]", "0"}], "&"}], ")"}]}]}], "]"}], "[", 
+          RowBox[{"[", 
+           RowBox[{"1", ",", "1"}], "]"}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"obpo1pi", "=", 
+         RowBox[{
+          RowBox[{"Position", "[", 
+           RowBox[{"auxx", ",", 
+            RowBox[{"_", "?", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{"AbsoluteTime", "[", "dated1pi", "]"}], "-", "#"}], 
+                "\[Equal]", "0"}], "&"}], ")"}]}]}], "]"}], "[", 
+          RowBox[{"[", 
+           RowBox[{"1", ",", "1"}], "]"}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"obpo1mi", "=", 
+         RowBox[{
+          RowBox[{"Position", "[", 
+           RowBox[{"auxx", ",", 
+            RowBox[{"_", "?", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{"AbsoluteTime", "[", "dated1mi", "]"}], "-", "#"}], 
+                "\[Equal]", "0"}], "&"}], ")"}]}]}], "]"}], "[", 
+          RowBox[{"[", 
+           RowBox[{"1", ",", "1"}], "]"}], "]"}]}], ";"}]}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     "\[IndentingNewLine]", 
+     RowBox[{"ndtot", "=", 
+      RowBox[{
+       RowBox[{"Total", "[", 
+        RowBox[{"obDataS", "[", 
+         RowBox[{"[", 
+          RowBox[{
+           RowBox[{"obpoi", ";;", "obpo"}], ",", "2"}], "]"}], "]"}], "]"}], 
+       "1."}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"ndtot1p", "=", 
+      RowBox[{
+       RowBox[{"Total", "[", 
+        RowBox[{"obDataS", "[", 
+         RowBox[{"[", 
+          RowBox[{
+           RowBox[{"obpo1pi", ";;", "obpo1p"}], ",", "2"}], "]"}], "]"}], 
+        "]"}], "1."}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"ndtot1m", "=", 
+      RowBox[{
+       RowBox[{"Total", "[", 
+        RowBox[{"obDataS", "[", 
+         RowBox[{"[", 
+          RowBox[{
+           RowBox[{"obpo1mi", ";;", "obpo1m"}], ",", "2"}], "]"}], "]"}], 
+        "]"}], "1."}]}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     RowBox[{"fd", "=", 
+      RowBox[{"ndtot", "/", "poptot"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"fd1p", "=", 
+      RowBox[{"ndtot1p", "/", "poptot"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"fd1m", "=", 
+      RowBox[{"ndtot1m", "/", "poptot"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"sigmafd", "=", 
+      RowBox[{
+       RowBox[{"Abs", "[", 
+        RowBox[{"fd1p", "-", "fd1m"}], "]"}], "/", "2"}]}], ";", 
+     "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"ndtot", ",", "fd", ",", "sigmafd"}], "}"}]}], 
+    "\[IndentingNewLine]", ")"}]}], ";"}]}], "Input",
+ CellLabel->
+  "(L1) In[121]:=",ExpressionUUID->"9be1e596-7007-4cd4-be94-59eba0986559"],
+
+Cell[BoxData[
+ RowBox[{"Which", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"ageBin", "\[Equal]", "1"}], "\[IndentingNewLine]", ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"PCfunNd", ";", "\[IndentingNewLine]", 
+    RowBox[{"(*", 
+     RowBox[{"SGfunNd", ";"}], "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"(*", 
+     RowBox[{"SGfunNd2", ";"}], "*)"}], "\[IndentingNewLine]", "SGfunNd3", 
+    ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{"dapoPC", "=", 
+     RowBox[{"PlotfunNd", "[", 
+      RowBox[{
+      "obDataPC", ",", "dbinPC", ",", "plabelndPC", ",", "expoPC", ",", 
+       "Red"}], "]"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"(*", 
+     RowBox[{
+      RowBox[{"dapoSG", "=", 
+       RowBox[{"PlotfunNd", "[", 
+        RowBox[{
+        "obDataSG", ",", "dbinSG", ",", "plabelndSG", ",", "expoSG", ",", 
+         "Blue"}], "]"}]}], ";"}], "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"(*", 
+     RowBox[{
+      RowBox[{"dapoSG2", "=", 
+       RowBox[{"PlotfunNd", "[", 
+        RowBox[{
+        "obDataSG2", ",", "dbinSG2", ",", "plabelndSG2", ",", "expoSG2", ",", 
+         "Purple"}], "]"}]}], ";"}], "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"dapoSG3", "=", 
+     RowBox[{"PlotfunNd", "[", 
+      RowBox[{
+      "obDataSG3", ",", "dbinSG3", ",", "plabelndSG3", ",", "expoSG3", ",", 
+       RowBox[{"Darker", "[", "Green", "]"}]}], "]"}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"dapo3", "=", 
+     RowBox[{"Show", "[", 
+      RowBox[{"dapoPC", 
+       RowBox[{"(*", 
+        RowBox[{",", "dapoSG"}], "*)"}], 
+       RowBox[{"(*", 
+        RowBox[{",", "dapoSG2"}], "*)"}], ",", "dapoSG3", ",", 
+       RowBox[{"ImageSize", "\[Rule]", "600"}]}], "]"}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"Export", "[", 
+     RowBox[{
+      RowBox[{"\"\<results/run\>\"", "<>", 
+       RowBox[{"ToString", "[", "run", "]"}], "<>", "\"\</\>\"", "<>", 
+       RowBox[{"ToString", "[", "run", "]"}], "<>", "\"\<-nd-a\>\"", "<>", 
+       RowBox[{"ToString", "[", "alevel", "]"}], "<>", "\"\<-b\>\"", "<>", 
+       RowBox[{"ToString", "[", "blevel", "]"}], "<>", "\"\<-m\>\"", "<>", 
+       RowBox[{"ToString", "[", "faval", "]"}], "<>", "\"\<-f\>\"", "<>", 
+       RowBox[{"ToString", "[", "phase", "]"}], "<>", "\"\<-compa.pdf\>\""}], 
+      ",", "dapo3"}], "]"}], ";", "\[IndentingNewLine]", 
+    "\[IndentingNewLine]", 
+    RowBox[{"ndvecPC", "=", 
+     RowBox[{"funNd", "[", 
+      RowBox[{"obDataPC", ",", "dbinPC"}], "]"}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"ndvecSG3", "=", 
+     RowBox[{"funNd", "[", 
+      RowBox[{"obDataSG3", ",", "dbinSG3"}], "]"}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"normand", "=", 
+     RowBox[{
+      RowBox[{"ndvecPC", "[", 
+       RowBox[{"[", "1", "]"}], "]"}], "/", 
+      RowBox[{"ndvecSG3", "[", 
+       RowBox[{"[", "1", "]"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"Export", "[", 
+     RowBox[{
+      RowBox[{"\"\<results/run\>\"", "<>", 
+       RowBox[{"ToString", "[", "run", "]"}], "<>", "\"\</\>\"", "<>", 
+       RowBox[{"ToString", "[", "run", "]"}], "<>", "\"\<-norm_nd-a\>\"", "<>", 
+       RowBox[{"ToString", "[", "alevel", "]"}], "<>", "\"\<-b\>\"", "<>", 
+       RowBox[{"ToString", "[", "blevel", "]"}], "<>", "\"\<-m\>\"", "<>", 
+       RowBox[{"ToString", "[", "faval", "]"}], "<>", "\"\<-f\>\"", "<>", 
+       RowBox[{"ToString", "[", "phase", "]"}], "<>", "\"\<.txt\>\""}], ",", 
+      "normand"}], "]"}], ";", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"ndtot", ",", "fd", ",", "sigmafd"}], "}"}], "=", "ndvecPC"}], 
+    ";"}], "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+   RowBox[{"ndType", "\[Equal]", "2"}], "\[IndentingNewLine]", ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"SGfunNd3", ";", "\[IndentingNewLine]", 
+    RowBox[{"dapoSG3", "=", 
+     RowBox[{"PlotfunNd", "[", 
+      RowBox[{
+      "obDataSG3", ",", "dbinSG3", ",", "plabelndSG3", ",", "expoSG3", ",", 
+       "Automatic"}], "]"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"ndvecSG3", "=", 
+     RowBox[{"funNd", "[", 
+      RowBox[{"obDataSG3", ",", "dbinSG3"}], "]"}]}], ";", 
+    "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{"normanno", "=", 
+     RowBox[{"ToExpression", "[", 
+      RowBox[{"Import", "[", 
+       RowBox[{"\"\<results/run\>\"", "<>", 
+        RowBox[{"ToString", "[", "run", "]"}], "<>", "\"\</\>\"", "<>", 
+        RowBox[{"ToString", "[", "run", "]"}], "<>", "\"\<-norm_nd-a\>\"", "<>", 
+        RowBox[{"ToString", "[", "alevel", "]"}], "<>", "\"\<-b\>\"", "<>", 
+        RowBox[{"ToString", "[", "blevel", "]"}], "<>", "\"\<-m\>\"", "<>", 
+        RowBox[{"ToString", "[", "faval", "]"}], "<>", "\"\<-f\>\"", "<>", 
+        RowBox[{"ToString", "[", "phase", "]"}], "<>", "\"\<.txt\>\""}], 
+       "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"ndtot", ",", "fd", ",", "sigmafd"}], "}"}], "=", 
+     RowBox[{"ndvecSG3", " ", "normanno"}]}], ";"}]}], "\[IndentingNewLine]", 
+  "]"}]], "Input",
+ CellLabel->
+  "(L1) In[123]:=",ExpressionUUID->"6ef4a9df-b9d6-4865-98f7-617541b0e00a"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", "check", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"DateHistogram", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"(*", 
+        RowBox[{"datacovidOb", ","}], "*)"}], "datacovidOb2", "}"}], ",", 
+      "\"\<Day\>\""}], "]"}], ";", "\[IndentingNewLine]", 
+    RowBox[{"Show", "[", 
+     RowBox[{"dapo", ",", "dh", ",", 
+      RowBox[{"ImageSize", "\[Rule]", "600"}]}], "]"}]}], "*)"}]}]], "Input",
+ CellLabel->
+  "(L1) In[124]:=",ExpressionUUID->"542895bc-a4f8-4d84-837b-e4a24515639d"],
+
+Cell[BoxData["ndvecPC"], "Input",
+ CellLabel->
+  "(L1) In[125]:=",ExpressionUUID->"7d55b402-820e-424c-908b-c402c76a14d7"],
+
+Cell[BoxData[
+ RowBox[{"funNd", "[", 
+  RowBox[{"obDataPC", ",", "1"}], "]"}]], "Input",
+ CellLabel->
+  "(L1) In[126]:=",ExpressionUUID->"e2984bb2-1773-47c4-9d9c-3a65552a64ae"],
+
+Cell[BoxData["datedi"], "Input",
+ CellLabel->
+  "(L1) In[127]:=",ExpressionUUID->"f66c113a-77b6-490e-b4d7-534f4ab3d203"],
+
+Cell[BoxData["dated"], "Input",
+ CellLabel->
+  "(L1) In[128]:=",ExpressionUUID->"a18da958-0225-4a8c-ba9f-19d0c45e691c"],
+
+Cell[BoxData[{"tauSD", "\[IndentingNewLine]", "tauSA", "\[IndentingNewLine]", \
+
+ RowBox[{"tauSD", "-", "tauSA"}]}], "Input",
+ CellLabel->
+  "(L1) In[129]:=",ExpressionUUID->"c1ff94dd-2ad9-4e16-be76-2a24398d9e4c"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[StyleBox["ns: Painel Coronav\[IAcute]rus (skipped)",
+ FontColor->GrayLevel[0.5]]], "Subsection",ExpressionUUID->"2d70dda7-fd29-\
+4c54-9318-6fcc4e131317"],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{"Dimensions", "[", 
+   RowBox[{"siData", "=", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"DateObject", "[", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"datasaudeF", "[", 
+            RowBox[{"[", 
+             RowBox[{"i", ",", "1"}], "]"}], "]"}], ",", "dateformatPC"}], 
+          "}"}], "]"}], ",", 
+        RowBox[{"datasaudeF", "[", 
+         RowBox[{"[", 
+          RowBox[{"i", ",", "4"}], "]"}], "]"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"i", ",", 
+        RowBox[{"Length", "[", "datasaudeF", "]"}]}], "}"}]}], "]"}]}], "]"}],
+   "*)"}]], "Input",
+ CellLabel->
+  "(L1) In[132]:=",ExpressionUUID->"e9d091cc-35df-4b0a-99dc-181dea453088"],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{"Dimensions", "[", 
+   RowBox[{"siDataS", "=", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"siData", "[", 
+         RowBox[{"[", 
+          RowBox[{"i", ",", "1"}], "]"}], "]"}], ",", 
+        RowBox[{"Mean", "[", 
+         RowBox[{"siData", "[", 
+          RowBox[{"[", 
+           RowBox[{
+            RowBox[{"Range", "[", 
+             RowBox[{"i", ",", 
+              RowBox[{"i", "+", "dbin", "-", "1"}]}], "]"}], ",", "2"}], 
+           "]"}], "]"}], "]"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"i", ",", "1", ",", 
+        RowBox[{
+         RowBox[{"Length", "[", "siData", "]"}], "-", 
+         RowBox[{"(", 
+          RowBox[{"dbin", "-", "1"}], ")"}]}], ",", "1"}], 
+       RowBox[{"(*", "dbin", "*)"}], "}"}]}], "]"}]}], "]"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"siDataS", "=", "siData"}], ";"}], " ", "*)"}], "*)"}]], "Input",
+ CellLabel->
+  "(L1) In[133]:=",ExpressionUUID->"35c709aa-9c9f-4e5c-84b3-2c9f874bc155"],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{
+   RowBox[{"dapo", "=", 
+    RowBox[{"DateListStepPlot", "[", 
+     RowBox[{"siDataS", ",", 
+      RowBox[{"Frame", "\[Rule]", "True"}], ",", 
+      RowBox[{"FrameStyle", "\[Rule]", "14"}], ",", 
+      RowBox[{"PlotRangeClipping", "\[Rule]", "True"}], ",", 
+      RowBox[{"AspectRatio", "\[Rule]", 
+       RowBox[{"1", "/", "2"}]}], ",", 
+      RowBox[{"(*", 
+       RowBox[{
+        RowBox[{"GridLines", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"datei", ",", "datef"}], "}"}], ",", " ", "None"}], 
+          "}"}]}], ",", 
+        RowBox[{"GridLinesStyle", "\[Rule]", 
+         RowBox[{"Directive", "[", 
+          RowBox[{"Blue", ",", 
+           RowBox[{"Thickness", "[", ".005", "]"}], ",", "Dashed"}], "]"}]}], 
+        ",", 
+        RowBox[{"Method", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{"\"\<GridLinesInFront\>\"", "\[Rule]", "True"}], "}"}]}], 
+        ","}], "*)"}], 
+      RowBox[{"PlotRange", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"DateObject", "[", 
+            RowBox[{"{", 
+             RowBox[{"2020", ",", "4", ",", "1"}], "}"}], "]"}], ",", 
+           "datapainel"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"0", ",", "All"}], "}"}]}], "}"}]}], ",", 
+      RowBox[{"Epilog", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"Text", "[", 
+          RowBox[{
+           RowBox[{"Style", "[", 
+            RowBox[{
+            "\"\<\!\(\*SubscriptBox[\(dn\), \
+\(s\)]\)/dt\\ncovid.saude.gov.br\>\"", ",", 
+             RowBox[{"FontSize", "\[Rule]", "15"}], ",", 
+             RowBox[{"TextAlignment", "\[Rule]", "Left"}]}], "]"}], ",", 
+           RowBox[{"Scaled", "[", 
+            RowBox[{"{", 
+             RowBox[{".25", ",", ".7"}], "}"}], "]"}]}], "]"}], ",", 
+         RowBox[{"EdgeForm", "[", "None", "]"}], ",", 
+         RowBox[{"Opacity", "[", ".2", "]"}], ",", "Blue", ",", 
+         RowBox[{"Rectangle", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"datei", ",", "0"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"datef", ",", "100000"}], "}"}]}], "]"}]}], "}"}]}], ",", 
+      
+      RowBox[{"Filling", "\[Rule]", "Bottom"}], ",", 
+      RowBox[{"FrameLabel", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"None", ",", "None"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"Automatic", ",", "infop"}], "}"}]}], "}"}]}]}], "]"}]}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"Export", "[", 
+    RowBox[{
+     RowBox[{"\"\<results/run\>\"", "<>", 
+      RowBox[{"ToString", "[", "run", "]"}], "<>", "\"\</\>\"", "<>", 
+      RowBox[{"ToString", "[", "run", "]"}], "<>", "\"\<-ns-a\>\"", "<>", 
+      RowBox[{"ToString", "[", "alevel", "]"}], "<>", "\"\<-b\>\"", "<>", 
+      RowBox[{"ToString", "[", "blevel", "]"}], "<>", "\"\<-m\>\"", "<>", 
+      RowBox[{"ToString", "[", "faval", "]"}], "<>", "\"\<-f\>\"", "<>", 
+      RowBox[{"ToString", "[", "phase", "]"}], "<>", "\"\<_AgeBin\>\"", "<>", 
+      
+      RowBox[{"ToString", "[", "ageBin", "]"}], "<>", "\"\<.pdf\>\""}], ",", 
+     "dapo"}], "]"}]}], "*)"}]], "Input",
+ CellLabel->
+  "(L1) In[134]:=",ExpressionUUID->"21396684-05fe-4448-ac19-ef8d445dc344"],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{
+   RowBox[{"Total", "[", 
+    RowBox[{"siData", "[", 
+     RowBox[{"[", 
+      RowBox[{"All", ",", "2"}], "]"}], "]"}], "]"}], "1.", 
+   "\[IndentingNewLine]", 
+   RowBox[{"Total", "[", 
+    RowBox[{"siDataS", "[", 
+     RowBox[{"[", 
+      RowBox[{"All", ",", "2"}], "]"}], "]"}], "]"}], "1."}], "*)"}]], "Input",\
+
+ CellLabel->
+  "(L1) In[135]:=",ExpressionUUID->"d8888257-84fc-460b-bdfe-baebd6ca9981"],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"auxx", "=", 
+     RowBox[{"AbsoluteTime", "/@", 
+      RowBox[{"siDataS", "[", 
+       RowBox[{"[", 
+        RowBox[{"All", ",", "1"}], "]"}], "]"}]}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"sipo", "=", 
+     RowBox[{
+      RowBox[{"Position", "[", 
+       RowBox[{"auxx", ",", 
+        RowBox[{"_", "?", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{"AbsoluteTime", "[", "dates", "]"}], "-", "#"}], 
+            "\[Equal]", "0"}], "&"}], ")"}]}]}], "]"}], "[", 
+      RowBox[{"[", 
+       RowBox[{"1", ",", "1"}], "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   
+   RowBox[{
+    RowBox[{"nstot", "=", 
+     RowBox[{
+      RowBox[{"Total", "[", 
+       RowBox[{"siDataS", "[", 
+        RowBox[{"[", 
+         RowBox[{
+          RowBox[{";;", "sipo"}], ",", "2"}], "]"}], "]"}], "]"}], "1."}]}], 
+    ";"}], "\[IndentingNewLine]", 
+   RowBox[{"fs", "=", 
+    RowBox[{"nstot", "/", "poptot"}]}]}], "*)"}]], "Input",
+ CellLabel->
+  "(L1) In[136]:=",ExpressionUUID->"c71f3845-edb0-4bff-9423-61f34e923024"],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{"fs", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Flatten", "[", 
+      RowBox[{
+       RowBox[{"Select", "[", 
+        RowBox[{
+         RowBox[{"DateWithinQ", "[", 
+          RowBox[{"dates", ",", 
+           RowBox[{"First", "@", "#"}]}], "]"}], "&"}], "]"}], "@", 
+       "siDataS"}], "]"}], "[", 
+     RowBox[{"[", 
+      RowBox[{"-", "1"}], "]"}], "]"}], "/", "poptot"}]}], "*)"}]], "Input",
+ CellLabel->
+  "(L1) In[137]:=",ExpressionUUID->"45967deb-801b-443b-b5a6-3829f6a52ae6"],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"sipo", "=", 
+     RowBox[{
+      RowBox[{"Position", "[", 
+       RowBox[{"auxx", ",", 
+        RowBox[{"_", "?", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{"AbsoluteTime", "[", "dates1p", "]"}], "-", "#"}], 
+            "\[Equal]", "0"}], "&"}], ")"}]}]}], "]"}], "[", 
+      RowBox[{"[", 
+       RowBox[{"1", ",", "1"}], "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   
+   RowBox[{
+    RowBox[{"nstot1p", "=", 
+     RowBox[{
+      RowBox[{"Total", "[", 
+       RowBox[{"siDataS", "[", 
+        RowBox[{"[", 
+         RowBox[{
+          RowBox[{";;", "sipo"}], ",", "2"}], "]"}], "]"}], "]"}], "1."}]}], 
+    ";"}], "\[IndentingNewLine]", 
+   RowBox[{"fs1p", "=", 
+    RowBox[{"nstot1p", "/", "poptot"}]}]}], "*)"}]], "Input",
+ CellLabel->
+  "(L1) In[138]:=",ExpressionUUID->"1534c74a-c4ca-4c73-a381-3c28e90d5881"],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"sipo", "=", 
+     RowBox[{
+      RowBox[{"Position", "[", 
+       RowBox[{"auxx", ",", 
+        RowBox[{"_", "?", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{"AbsoluteTime", "[", "dates1m", "]"}], "-", "#"}], 
+            "\[Equal]", "0"}], "&"}], ")"}]}]}], "]"}], "[", 
+      RowBox[{"[", 
+       RowBox[{"1", ",", "1"}], "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   
+   RowBox[{
+    RowBox[{"nstot1m", "=", 
+     RowBox[{
+      RowBox[{"Total", "[", 
+       RowBox[{"siDataS", "[", 
+        RowBox[{"[", 
+         RowBox[{
+          RowBox[{";;", "sipo"}], ",", "2"}], "]"}], "]"}], "]"}], "1."}]}], 
+    ";"}], "\[IndentingNewLine]", 
+   RowBox[{"fs1m", "=", 
+    RowBox[{"nstot1m", "/", "poptot"}]}]}], "*)"}]], "Input",
+ CellLabel->
+  "(L1) In[139]:=",ExpressionUUID->"ac0f50ec-08d5-477f-906a-b62ec4eaa442"],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"sigmafs", "=", 
+     RowBox[{
+      RowBox[{"Abs", "[", 
+       RowBox[{"fs1p", "-", "fs1m"}], "]"}], "/", "2"}]}], ",", "fs"}], "}"}],
+   "*)"}]], "Input",
+ CellLabel->
+  "(L1) In[140]:=",ExpressionUUID->"b6334576-4d05-48b7-9b69-8ce5f8884d50"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"fs", ",", "sigmafs"}], "}"}], "=", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0"}], "}"}]}], ";"}]], "Input",
+ CellLabel->
+  "(L1) In[141]:=",ExpressionUUID->"4f5f487f-d77a-49e3-ac91-319a9e477e6e"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["final", "Subsection",ExpressionUUID->"a1a8702d-82d5-462d-9a21-a3de1cb7a7fd"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Which", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"fa", "\[Equal]", "\"\<-\>\""}], "\[IndentingNewLine]", ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"ifr", "=", "\"\<-\>\""}], ";", "\[IndentingNewLine]", 
+     RowBox[{"sifr", "=", "\"\<-\>\""}], ";", "\[IndentingNewLine]", 
+     RowBox[{"etam", "=", "\"\<-\>\""}], ";", "\[IndentingNewLine]", 
+     RowBox[{"setam", "=", "\"\<-\>\""}], ";", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"rsa", ",", "rsifr", ",", "rseta"}], "}"}], "=", 
+      RowBox[{"{", 
+       RowBox[{"\"\<-\>\"", ",", "\"\<-\>\"", ",", "\"\<-\>\""}], "}"}]}], 
+     ";"}], "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Round", "[", 
+      RowBox[{"fa", ",", 
+       RowBox[{"10", "^", 
+        RowBox[{"-", "10"}]}]}], "]"}], "\[Equal]", "0"}], 
+    "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"ifr", "=", "\"\<-\>\""}], ";", "\[IndentingNewLine]", 
+     RowBox[{"sifr", "=", "\"\<-\>\""}], ";", "\[IndentingNewLine]", 
+     RowBox[{"etam", "=", 
+      RowBox[{"fa", "/", "fs"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"setam", "=", 
+      RowBox[{"Sqrt", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          SuperscriptBox["fa", "2"], "/", 
+          SuperscriptBox["fs", "2"]}], " ", 
+         RowBox[{
+          SuperscriptBox["sigmafs", "2"], "/", 
+          SuperscriptBox["fs", "2"]}]}], "+", 
+        RowBox[{
+         RowBox[{"1", "/", 
+          SuperscriptBox["fs", "2"]}], " ", 
+         SuperscriptBox["sigmafa", "2"]}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"rsa", ",", "rsifr", ",", "rseta"}], "}"}], "=", 
+      RowBox[{"{", 
+       RowBox[{"\"\<-\>\"", ",", "\"\<-\>\"", ",", "\"\<-\>\""}], "}"}]}], 
+     ";"}], "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Round", "[", 
+      RowBox[{"fs", ",", 
+       RowBox[{"10", "^", 
+        RowBox[{"-", "10"}]}]}], "]"}], "\[Equal]", "0"}], 
+    "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"ifr", "=", 
+      RowBox[{"fd", "/", "fa"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"sifr", "=", 
+      RowBox[{"Sqrt", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"1", "/", 
+          SuperscriptBox["fa", "2"]}], 
+         SuperscriptBox["sigmafd", "2"]}], "+", 
+        RowBox[{
+         RowBox[{
+          SuperscriptBox["fd", "2"], "/", 
+          SuperscriptBox["fa", "2"]}], 
+         RowBox[{
+          SuperscriptBox["sigmafa", "2"], "/", 
+          SuperscriptBox["fa", "2"]}]}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"etam", "=", "\"\<-\>\""}], ";", "\[IndentingNewLine]", 
+     RowBox[{"setam", "=", "\"\<-\>\""}], ";", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"rsa", ",", "rsifr", ",", "rseta"}], "}"}], "=", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"sigmafa", "/", "fa"}], ",", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Round", "[", 
+            RowBox[{"fd", ",", 
+             RowBox[{"10", "^", 
+              RowBox[{"-", "10"}]}]}], "]"}], "\[Equal]", "0"}], ",", 
+          "\"\<-\>\"", ",", 
+          RowBox[{"sifr", "/", "ifr"}]}], "]"}], ",", "\"\<-\>\""}], "}"}]}], 
+     ";"}], "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+    RowBox[{"0", "\[Equal]", "0"}], "\[IndentingNewLine]", ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"ifr", "=", 
+      RowBox[{"fd", "/", "fa"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", 
+      RowBox[{
+       RowBox[{"sifr", "=", 
+        RowBox[{"ifr", " ", 
+         RowBox[{"Sqrt", "[", 
+          RowBox[{
+           RowBox[{
+            SuperscriptBox["sigmafd", "2"], "/", 
+            SuperscriptBox["fd", "2"]}], "+", 
+           RowBox[{
+            SuperscriptBox["sigmafa", "2"], "/", 
+            SuperscriptBox["fa", "2"]}]}], "]"}]}]}], ";"}], "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"sifr", "=", 
+      RowBox[{"Sqrt", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"1", "/", 
+          SuperscriptBox["fa", "2"]}], " ", 
+         SuperscriptBox["sigmafd", "2"]}], "+", 
+        RowBox[{
+         RowBox[{
+          SuperscriptBox["fd", "2"], "/", 
+          SuperscriptBox["fa", "2"]}], 
+         RowBox[{
+          SuperscriptBox["sigmafa", "2"], "/", 
+          SuperscriptBox["fa", "2"]}]}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"etam", "=", 
+      RowBox[{"fa", "/", "fs"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"setam", "=", 
+      RowBox[{"etam", " ", 
+       RowBox[{"Sqrt", "[", 
+        RowBox[{
+         RowBox[{
+          SuperscriptBox["sigmafs", "2"], "/", 
+          SuperscriptBox["fs", "2"]}], "+", 
+         RowBox[{
+          SuperscriptBox["sigmafa", "2"], "/", 
+          SuperscriptBox["fa", "2"]}]}], "]"}]}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"rsa", ",", "rsifr", ",", "rseta"}], "}"}], "=", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"sigmafa", "/", "fa"}], ",", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Round", "[", 
+            RowBox[{"fd", ",", 
+             RowBox[{"10", "^", 
+              RowBox[{"-", "10"}]}]}], "]"}], "\[Equal]", "0"}], ",", 
+          "\"\<-\>\"", ",", 
+          RowBox[{"sifr", "/", "ifr"}]}], "]"}], ",", 
+        RowBox[{"setam", "/", "etam"}]}], "}"}]}], ";"}]}], 
+   "\[IndentingNewLine]", "]"}], ";"}]], "Input",
+ CellLabel->
+  "(L1) In[142]:=",ExpressionUUID->"9d66566a-771d-4877-b8c2-1de58632466a"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"vecfoda", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "etam", ",", "setam", ",", " ", "ifr", ",", "sifr", ",", " ", "fa", ",", 
+     " ", "fs", ",", " ", "fd", ",", " ", "tauSD", ",", "rsa", ",", "rsifr", 
+     ",", "rseta", ",", 
+     RowBox[{"sigmafd", "/", "fd"}], ",", "\"\<-\>\""}], 
+    RowBox[{"(*", 
+     RowBox[{"sigmafs", "/", "fs"}], "*)"}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"vecfoda", "=", 
+   RowBox[{"N", "[", "vecfoda", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"extab", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "\"\<eta+\>\"", ",", "\"\<sigma-eta\>\"", ",", "\"\<IFR\>\"", ",", 
+       "\"\<sigma-ifr\>\"", ",", "\"\<fa\>\"", ",", "\"\<fs\>\"", ",", 
+       "\"\<fd\>\"", ",", "\"\<taud\>\"", ",", "\"\<s/fa\>\"", ",", 
+       "\"\<s/ifr\>\"", ",", "\"\<s/eta\>\"", ",", "\"\<s/fd\>\"", ",", 
+       "\"\<s/fs\>\""}], "}"}], ",", "vecfoda"}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"TableForm", "[", "extab", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Export", "[", 
+  RowBox[{
+   RowBox[{"\"\<results/run\>\"", "<>", 
+    RowBox[{"ToString", "[", "run", "]"}], "<>", "\"\</\>\"", "<>", 
+    RowBox[{"ToString", "[", "run", "]"}], "<>", "\"\<-ftab-a\>\"", "<>", 
+    RowBox[{"ToString", "[", "alevel", "]"}], "<>", "\"\<-b\>\"", "<>", 
+    RowBox[{"ToString", "[", "blevel", "]"}], "<>", "\"\<-m\>\"", "<>", 
+    RowBox[{"ToString", "[", "faval", "]"}], "<>", "\"\<-f\>\"", "<>", 
+    RowBox[{"ToString", "[", "phase", "]"}], "<>", "\"\<_AgeBin\>\"", "<>", 
+    RowBox[{"ToString", "[", "ageBin", "]"}], "<>", "\"\<.txt\>\""}], ",", 
+   "extab", ",", "\"\<Table\>\""}], "]"}]}], "Input",
+ CellLabel->
+  "(L1) In[143]:=",ExpressionUUID->"09802dc4-45a5-4dbf-8544-fba83c8518fe"]
+}, Closed]]
+},
+WindowSize->{980, 711},
+WindowMargins->{{57, Automatic}, {Automatic, 0}},
+TaggingRules->{"TryRealOnly" -> False},
+FrontEndVersion->"12.2 for Mac OS X x86 (64-bit) (December 12, 2020)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"e175e37a-8f36-46df-bae4-b7e4e3cb2cf2"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 377, 11, 52, "Input",ExpressionUUID->"1dc70b22-a1ca-4f14-933e-93f35dd0fc72"],
+Cell[938, 33, 1775, 46, 325, "Input",ExpressionUUID->"50c52f9c-5b54-4efd-a7f8-d05853da7d9b"],
+Cell[CellGroupData[{
+Cell[2738, 83, 95, 0, 54, "Subsection",ExpressionUUID->"15177f02-0ce9-4093-9bbe-08ed61798ecd"],
+Cell[2836, 85, 4716, 125, 514, "Input",ExpressionUUID->"e794e9ac-3de8-4a96-bdbd-26ed37926844"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[7589, 215, 95, 0, 38, "Subsection",ExpressionUUID->"3603d88c-c66f-4723-90ed-5e2728b7e89e"],
+Cell[7687, 217, 4164, 118, 472, "Input",ExpressionUUID->"430617af-0d06-4005-bfb9-248cbf22888d"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[11888, 340, 98, 0, 38, "Subsection",ExpressionUUID->"1b922b21-79bf-4e27-92e2-c0e97b07bdda"],
+Cell[CellGroupData[{
+Cell[12011, 344, 81, 0, 45, "Subsubsection",ExpressionUUID->"63ccb177-14dc-40ea-a186-492a119c183a"],
+Cell[12095, 346, 8936, 221, 829, "Input",ExpressionUUID->"0f4a0258-a7ec-40af-9f7e-ffa0ada5d50a"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[21068, 572, 81, 0, 37, "Subsubsection",ExpressionUUID->"41e61321-28f8-459e-85e3-4b7c33822e1c"],
+Cell[21152, 574, 8714, 217, 808, "Input",ExpressionUUID->"ff32479e-b8a1-48f4-a40e-3bad1042c0ec"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[29903, 796, 81, 0, 37, "Subsubsection",ExpressionUUID->"3a99a1b8-fe00-4240-86ba-e28ebb4230d1"],
+Cell[29987, 798, 10588, 271, 1060, "Input",ExpressionUUID->"4777f07c-a6c0-434d-a866-836b8116b32f"]
+}, Open  ]]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[40624, 1075, 82, 0, 38, "Subsection",ExpressionUUID->"cd38e6ce-30ac-4b4e-b385-3ad4af8152c8"],
+Cell[40709, 1077, 610, 15, 52, "Input",ExpressionUUID->"79683854-0f42-4f1f-a0f9-7c49f30e9670"],
+Cell[41322, 1094, 1175, 32, 94, "Input",ExpressionUUID->"89177d77-e051-49f4-8184-90404d58c5f1"],
+Cell[42500, 1128, 1321, 38, 136, "Input",ExpressionUUID->"d7e0562b-87f5-4590-8418-f4af2daf063e"],
+Cell[43824, 1168, 1466, 41, 115, "Input",ExpressionUUID->"cbe3d27e-1fdd-4073-8757-362ef59bb145"],
+Cell[45293, 1211, 2521, 60, 142, "Input",ExpressionUUID->"2089eec0-ea2d-49f8-af48-9dc3afe07227"],
+Cell[47817, 1273, 1687, 45, 157, "Input",ExpressionUUID->"687d04e9-f5fb-41ad-ac53-ad9bdee65bdf"],
+Cell[49507, 1320, 524, 15, 73, "Input",ExpressionUUID->"85763038-9ce7-4b15-8b25-e5744583e38a"],
+Cell[50034, 1337, 453, 13, 73, "Input",ExpressionUUID->"4ef4a622-a982-4d61-ab17-b261ae57cd3c"],
+Cell[50490, 1352, 2463, 76, 346, "Input",ExpressionUUID->"19901dcd-6581-4d41-87c2-bce4099c611f"],
+Cell[52956, 1430, 2027, 53, 98, "Input",ExpressionUUID->"c10af996-373f-4aa3-b794-6d5d7edd3e09"],
+Cell[54986, 1485, 426, 13, 30, "Input",ExpressionUUID->"f5d4545f-1e16-45fb-81b6-c24949a27055"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[55449, 1503, 189, 5, 38, "Subsection",ExpressionUUID->"04f6bc33-1df4-47f1-a3b5-a435044865b9"],
+Cell[55641, 1510, 31824, 783, 2971, "Input",ExpressionUUID->"e353b4d1-8175-4bc8-b738-334636c67110"],
+Cell[87468, 2295, 11396, 294, 892, "Input",ExpressionUUID->"9be1e596-7007-4cd4-be94-59eba0986559"],
+Cell[98867, 2591, 5112, 113, 724, "Input",ExpressionUUID->"6ef4a9df-b9d6-4865-98f7-617541b0e00a"],
+Cell[103982, 2706, 564, 15, 73, "Input",ExpressionUUID->"542895bc-a4f8-4d84-837b-e4a24515639d"],
+Cell[104549, 2723, 121, 2, 30, "Input",ExpressionUUID->"7d55b402-820e-424c-908b-c402c76a14d7"],
+Cell[104673, 2727, 176, 4, 30, "Input",ExpressionUUID->"e2984bb2-1773-47c4-9d9c-3a65552a64ae"],
+Cell[104852, 2733, 120, 2, 30, "Input",ExpressionUUID->"f66c113a-77b6-490e-b4d7-534f4ab3d203"],
+Cell[104975, 2737, 119, 2, 30, "Input",ExpressionUUID->"a18da958-0225-4a8c-ba9f-19d0c45e691c"],
+Cell[105097, 2741, 213, 4, 73, "Input",ExpressionUUID->"c1ff94dd-2ad9-4e16-be76-2a24398d9e4c"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[105347, 2750, 167, 2, 38, "Subsection",ExpressionUUID->"2d70dda7-fd29-4c54-9318-6fcc4e131317"],
+Cell[105517, 2754, 769, 23, 30, "Input",ExpressionUUID->"e9d091cc-35df-4b0a-99dc-181dea453088"],
+Cell[106289, 2779, 1064, 31, 52, "Input",ExpressionUUID->"35c709aa-9c9f-4e5c-84b3-2c9f874bc155"],
+Cell[107356, 2812, 3351, 84, 157, "Input",ExpressionUUID->"21396684-05fe-4448-ac19-ef8d445dc344"],
+Cell[110710, 2898, 445, 14, 52, "Input",ExpressionUUID->"d8888257-84fc-460b-bdfe-baebd6ca9981"],
+Cell[111158, 2914, 1151, 37, 94, "Input",ExpressionUUID->"c71f3845-edb0-4bff-9423-61f34e923024"],
+Cell[112312, 2953, 526, 16, 30, "Input",ExpressionUUID->"45967deb-801b-443b-b5a6-3829f6a52ae6"],
+Cell[112841, 2971, 945, 30, 73, "Input",ExpressionUUID->"1534c74a-c4ca-4c73-a381-3c28e90d5881"],
+Cell[113789, 3003, 945, 30, 73, "Input",ExpressionUUID->"ac0f50ec-08d5-477f-906a-b62ec4eaa442"],
+Cell[114737, 3035, 315, 10, 30, "Input",ExpressionUUID->"b6334576-4d05-48b7-9b69-8ce5f8884d50"],
+Cell[115055, 3047, 260, 8, 30, "Input",ExpressionUUID->"4f5f487f-d77a-49e3-ac91-319a9e477e6e"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[115352, 3060, 82, 0, 38, "Subsection",ExpressionUUID->"a1a8702d-82d5-462d-9a21-a3de1cb7a7fd"],
+Cell[115437, 3062, 5716, 155, 738, "Input",ExpressionUUID->"9d66566a-771d-4877-b8c2-1de58632466a"],
+Cell[121156, 3219, 1817, 40, 136, "Input",ExpressionUUID->"09802dc4-45a5-4dbf-8544-fba83c8518fe"]
+}, Closed]]
+}
+]
+*)
+
