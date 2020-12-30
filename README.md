@@ -4,4 +4,4 @@
 
 `epiresults.nb` imports results from the above notebooks in order to make summary tables. The previous notebooks compute the IFRs under the Gaussian approximaiton. 
 
-Both prevalence and IFR values reported in the paper are obtained in `epicovid-ifr-public-v1.nb` by fully taking into account non-Gaussianities.
+Both prevalence and IFR values reported in the paper are obtained in `epicovid-ifr-public-v2.nb` by fully taking into account non-Gaussianities. You will need also to download and extract the file results.7z.
